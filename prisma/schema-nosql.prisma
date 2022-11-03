@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/nosql-client"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_DATABASE_URL")
+}
+
+model Client {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  dni          String         @unique
+  firstName    String
+  lastName     String
+  email        String         @unique
+  phoneNumber  Int            @unique
+  movementData MovementData[]
+}
+
+model Benefits {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  discountPercentage Float
+  refoundCap         Float
+  valideSince        DateTime
+  valideTo           DateTime
+}
+
+model Coin {
+  id                 String         @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  description        String
+  quotationReference Float
+  annualPerformance  Float
+  movementData       MovementData[]
+}
+
+model MovementData {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  date                  DateTime
+  type                  String
+  client                Client   @relation(fields: [clientId], references: [id])
+  clientId              String
+  senderWalletAddress   String
+  receiverWalletAddress String
+  coin                  Coin     @relation(fields: [coinId], references: [id])
+  coinId                String
+  amount                Float
+  fee                   Float
+}
