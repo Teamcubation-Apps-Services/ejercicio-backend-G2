@@ -1,9 +1,8 @@
-import { Router } from 'express';
-import { getAllBenefits, getBenefit, postBenefit} from '../controllers/benefitController'
+import { Router } from 'express'
+import { getAllBenefitsController } from '../controllers/benefitController'
 
-const benefits = Router();
+const benefits = Router()
 
-benefits.route('/').get(getAllBenefits).post(postBenefit);
-benefits.route('/:id').get(getBenefit);
+benefits.route('/').get(getAllBenefitsController)
 
-export default benefits;
+export default benefits
