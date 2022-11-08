@@ -15,6 +15,7 @@ model Client {
   lastName      String          @db.VarChar(255)
   email         String          @unique @db.VarChar(255)
   phoneNumber   Int             @unique
+  isActive      Boolean
   movementData  MovementData[]
   clientBalance ClientBalance[]
 }
@@ -22,6 +23,7 @@ model Client {
 model Movement {
   id           Int            @id @default(autoincrement())
   type         String         @db.VarChar(255)
+  isActive      Boolean
   movementData MovementData[]
 }
 
@@ -32,6 +34,7 @@ model Benefits {
   refoundCap         Decimal
   valideSince        DateTime
   valideTo           DateTime
+  isActive      Boolean
 }
 
 model Coin {
@@ -40,6 +43,7 @@ model Coin {
   description        String          @db.VarChar(255)
   quotationReference Decimal
   annualPerformance  Decimal
+  isActive      Boolean
   clientBalance      ClientBalance[]
   movementData       MovementData[]
 }
@@ -57,6 +61,7 @@ model MovementData {
   coinId                Int
   amount                Decimal
   fee                   Decimal
+  isActive      Boolean
 }
 
 model ClientBalance {
@@ -65,5 +70,6 @@ model ClientBalance {
   coin     Coin    @relation(fields: [coinId], references: [id])
   coinId   Int
   balance  Decimal
+  isActive      Boolean
   @@id([clientId, coinId])
 }
