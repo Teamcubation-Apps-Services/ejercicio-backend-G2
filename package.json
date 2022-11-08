@@ -30,13 +30,13 @@
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
-    "express": "4.18.2"
+    "express": "^4.18.2"
   },
   "eslintConfig": {
     "parserOptions": {
       "project": "./tsconfig.json"
     },
-    "extends":[
+    "extends": [
       "./node_modules/ts-standard/eslintrc.json"
     ]
   },
