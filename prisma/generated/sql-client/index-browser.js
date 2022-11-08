@@ -94,13 +94,15 @@ exports.Prisma.BenefitsScalarFieldEnum = makeEnum({
   discountPercentage: 'discountPercentage',
   refoundCap: 'refoundCap',
   valideSince: 'valideSince',
-  valideTo: 'valideTo'
+  valideTo: 'valideTo',
+  isActive: 'isActive'
 });
 
 exports.Prisma.ClientBalanceScalarFieldEnum = makeEnum({
   clientId: 'clientId',
   coinId: 'coinId',
-  balance: 'balance'
+  balance: 'balance',
+  isActive: 'isActive'
 });
 
 exports.Prisma.ClientScalarFieldEnum = makeEnum({
@@ -109,7 +111,8 @@ exports.Prisma.ClientScalarFieldEnum = makeEnum({
   firstName: 'firstName',
   lastName: 'lastName',
   email: 'email',
-  phoneNumber: 'phoneNumber'
+  phoneNumber: 'phoneNumber',
+  isActive: 'isActive'
 });
 
 exports.Prisma.CoinScalarFieldEnum = makeEnum({
@@ -117,7 +120,8 @@ exports.Prisma.CoinScalarFieldEnum = makeEnum({
   name: 'name',
   description: 'description',
   quotationReference: 'quotationReference',
-  annualPerformance: 'annualPerformance'
+  annualPerformance: 'annualPerformance',
+  isActive: 'isActive'
 });
 
 exports.Prisma.MovementDataScalarFieldEnum = makeEnum({
@@ -129,12 +133,14 @@ exports.Prisma.MovementDataScalarFieldEnum = makeEnum({
   receiverWalletAddress: 'receiverWalletAddress',
   coinId: 'coinId',
   amount: 'amount',
-  fee: 'fee'
+  fee: 'fee',
+  isActive: 'isActive'
 });
 
 exports.Prisma.MovementScalarFieldEnum = makeEnum({
   id: 'id',
-  type: 'type'
+  type: 'type',
+  isActive: 'isActive'
 });
 
 exports.Prisma.QueryMode = makeEnum({

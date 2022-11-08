@@ -23,6 +23,7 @@ export type Client = {
   lastName: string
   email: string
   phoneNumber: number
+  isActive: boolean
 }
 
 /**
@@ -32,6 +33,7 @@ export type Client = {
 export type Movement = {
   id: number
   type: string
+  isActive: boolean
 }
 
 /**
@@ -45,6 +47,7 @@ export type Benefits = {
   refoundCap: Prisma.Decimal
   valideSince: Date
   valideTo: Date
+  isActive: boolean
 }
 
 /**
@@ -57,6 +60,7 @@ export type Coin = {
   description: string
   quotationReference: Prisma.Decimal
   annualPerformance: Prisma.Decimal
+  isActive: boolean
 }
 
 /**
@@ -73,6 +77,7 @@ export type MovementData = {
   coinId: number
   amount: Prisma.Decimal
   fee: Prisma.Decimal
+  isActive: boolean
 }
 
 /**
@@ -83,6 +88,7 @@ export type ClientBalance = {
   clientId: number
   coinId: number
   balance: Prisma.Decimal
+  isActive: boolean
 }
 
 
@@ -1122,6 +1128,7 @@ export namespace Prisma {
     lastName: string | null
     email: string | null
     phoneNumber: number | null
+    isActive: boolean | null
   }
 
   export type ClientMaxAggregateOutputType = {
@@ -1131,6 +1138,7 @@ export namespace Prisma {
     lastName: string | null
     email: string | null
     phoneNumber: number | null
+    isActive: boolean | null
   }
 
   export type ClientCountAggregateOutputType = {
@@ -1140,6 +1148,7 @@ export namespace Prisma {
     lastName: number
     email: number
     phoneNumber: number
+    isActive: number
     _all: number
   }
 
@@ -1161,6 +1170,7 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phoneNumber?: true
+    isActive?: true
   }
 
   export type ClientMaxAggregateInputType = {
@@ -1170,6 +1180,7 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phoneNumber?: true
+    isActive?: true
   }
 
   export type ClientCountAggregateInputType = {
@@ -1179,6 +1190,7 @@ export namespace Prisma {
     lastName?: true
     email?: true
     phoneNumber?: true
+    isActive?: true
     _all?: true
   }
 
@@ -1281,6 +1293,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive: boolean
     _count: ClientCountAggregateOutputType | null
     _avg: ClientAvgAggregateOutputType | null
     _sum: ClientSumAggregateOutputType | null
@@ -1309,6 +1322,7 @@ export namespace Prisma {
     lastName?: boolean
     email?: boolean
     phoneNumber?: boolean
+    isActive?: boolean
     movementData?: boolean | MovementDataFindManyArgs
     clientBalance?: boolean | ClientBalanceFindManyArgs
     _count?: boolean | ClientCountOutputTypeArgs
@@ -2097,16 +2111,19 @@ export namespace Prisma {
   export type MovementMinAggregateOutputType = {
     id: number | null
     type: string | null
+    isActive: boolean | null
   }
 
   export type MovementMaxAggregateOutputType = {
     id: number | null
     type: string | null
+    isActive: boolean | null
   }
 
   export type MovementCountAggregateOutputType = {
     id: number
     type: number
+    isActive: number
     _all: number
   }
 
@@ -2122,16 +2139,19 @@ export namespace Prisma {
   export type MovementMinAggregateInputType = {
     id?: true
     type?: true
+    isActive?: true
   }
 
   export type MovementMaxAggregateInputType = {
     id?: true
     type?: true
+    isActive?: true
   }
 
   export type MovementCountAggregateInputType = {
     id?: true
     type?: true
+    isActive?: true
     _all?: true
   }
 
@@ -2230,6 +2250,7 @@ export namespace Prisma {
   export type MovementGroupByOutputType = {
     id: number
     type: string
+    isActive: boolean
     _count: MovementCountAggregateOutputType | null
     _avg: MovementAvgAggregateOutputType | null
     _sum: MovementSumAggregateOutputType | null
@@ -2254,6 +2275,7 @@ export namespace Prisma {
   export type MovementSelect = {
     id?: boolean
     type?: boolean
+    isActive?: boolean
     movementData?: boolean | MovementDataFindManyArgs
     _count?: boolean | MovementCountOutputTypeArgs
   }
@@ -3044,6 +3066,7 @@ export namespace Prisma {
     refoundCap: Decimal | null
     valideSince: Date | null
     valideTo: Date | null
+    isActive: boolean | null
   }
 
   export type BenefitsMaxAggregateOutputType = {
@@ -3053,6 +3076,7 @@ export namespace Prisma {
     refoundCap: Decimal | null
     valideSince: Date | null
     valideTo: Date | null
+    isActive: boolean | null
   }
 
   export type BenefitsCountAggregateOutputType = {
@@ -3062,6 +3086,7 @@ export namespace Prisma {
     refoundCap: number
     valideSince: number
     valideTo: number
+    isActive: number
     _all: number
   }
 
@@ -3085,6 +3110,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    isActive?: true
   }
 
   export type BenefitsMaxAggregateInputType = {
@@ -3094,6 +3120,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    isActive?: true
   }
 
   export type BenefitsCountAggregateInputType = {
@@ -3103,6 +3130,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    isActive?: true
     _all?: true
   }
 
@@ -3205,6 +3233,7 @@ export namespace Prisma {
     refoundCap: Decimal
     valideSince: Date
     valideTo: Date
+    isActive: boolean
     _count: BenefitsCountAggregateOutputType | null
     _avg: BenefitsAvgAggregateOutputType | null
     _sum: BenefitsSumAggregateOutputType | null
@@ -3233,6 +3262,7 @@ export namespace Prisma {
     refoundCap?: boolean
     valideSince?: boolean
     valideTo?: boolean
+    isActive?: boolean
   }
 
   export type BenefitsGetPayload<
@@ -3969,6 +3999,7 @@ export namespace Prisma {
     description: string | null
     quotationReference: Decimal | null
     annualPerformance: Decimal | null
+    isActive: boolean | null
   }
 
   export type CoinMaxAggregateOutputType = {
@@ -3977,6 +4008,7 @@ export namespace Prisma {
     description: string | null
     quotationReference: Decimal | null
     annualPerformance: Decimal | null
+    isActive: boolean | null
   }
 
   export type CoinCountAggregateOutputType = {
@@ -3985,6 +4017,7 @@ export namespace Prisma {
     description: number
     quotationReference: number
     annualPerformance: number
+    isActive: number
     _all: number
   }
 
@@ -4007,6 +4040,7 @@ export namespace Prisma {
     description?: true
     quotationReference?: true
     annualPerformance?: true
+    isActive?: true
   }
 
   export type CoinMaxAggregateInputType = {
@@ -4015,6 +4049,7 @@ export namespace Prisma {
     description?: true
     quotationReference?: true
     annualPerformance?: true
+    isActive?: true
   }
 
   export type CoinCountAggregateInputType = {
@@ -4023,6 +4058,7 @@ export namespace Prisma {
     description?: true
     quotationReference?: true
     annualPerformance?: true
+    isActive?: true
     _all?: true
   }
 
@@ -4124,6 +4160,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal
     annualPerformance: Decimal
+    isActive: boolean
     _count: CoinCountAggregateOutputType | null
     _avg: CoinAvgAggregateOutputType | null
     _sum: CoinSumAggregateOutputType | null
@@ -4151,6 +4188,7 @@ export namespace Prisma {
     description?: boolean
     quotationReference?: boolean
     annualPerformance?: boolean
+    isActive?: boolean
     clientBalance?: boolean | ClientBalanceFindManyArgs
     movementData?: boolean | MovementDataFindManyArgs
     _count?: boolean | CoinCountOutputTypeArgs
@@ -4956,6 +4994,7 @@ export namespace Prisma {
     coinId: number | null
     amount: Decimal | null
     fee: Decimal | null
+    isActive: boolean | null
   }
 
   export type MovementDataMaxAggregateOutputType = {
@@ -4968,6 +5007,7 @@ export namespace Prisma {
     coinId: number | null
     amount: Decimal | null
     fee: Decimal | null
+    isActive: boolean | null
   }
 
   export type MovementDataCountAggregateOutputType = {
@@ -4980,6 +5020,7 @@ export namespace Prisma {
     coinId: number
     amount: number
     fee: number
+    isActive: number
     _all: number
   }
 
@@ -5012,6 +5053,7 @@ export namespace Prisma {
     coinId?: true
     amount?: true
     fee?: true
+    isActive?: true
   }
 
   export type MovementDataMaxAggregateInputType = {
@@ -5024,6 +5066,7 @@ export namespace Prisma {
     coinId?: true
     amount?: true
     fee?: true
+    isActive?: true
   }
 
   export type MovementDataCountAggregateInputType = {
@@ -5036,6 +5079,7 @@ export namespace Prisma {
     coinId?: true
     amount?: true
     fee?: true
+    isActive?: true
     _all?: true
   }
 
@@ -5141,6 +5185,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal
     fee: Decimal
+    isActive: boolean
     _count: MovementDataCountAggregateOutputType | null
     _avg: MovementDataAvgAggregateOutputType | null
     _sum: MovementDataSumAggregateOutputType | null
@@ -5175,6 +5220,7 @@ export namespace Prisma {
     coinId?: boolean
     amount?: boolean
     fee?: boolean
+    isActive?: boolean
   }
 
   export type MovementDataInclude = {
@@ -5967,18 +6013,21 @@ export namespace Prisma {
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
+    isActive: boolean | null
   }
 
   export type ClientBalanceMaxAggregateOutputType = {
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
+    isActive: boolean | null
   }
 
   export type ClientBalanceCountAggregateOutputType = {
     clientId: number
     coinId: number
     balance: number
+    isActive: number
     _all: number
   }
 
@@ -5999,18 +6048,21 @@ export namespace Prisma {
     clientId?: true
     coinId?: true
     balance?: true
+    isActive?: true
   }
 
   export type ClientBalanceMaxAggregateInputType = {
     clientId?: true
     coinId?: true
     balance?: true
+    isActive?: true
   }
 
   export type ClientBalanceCountAggregateInputType = {
     clientId?: true
     coinId?: true
     balance?: true
+    isActive?: true
     _all?: true
   }
 
@@ -6110,6 +6162,7 @@ export namespace Prisma {
     clientId: number
     coinId: number
     balance: Decimal
+    isActive: boolean
     _count: ClientBalanceCountAggregateOutputType | null
     _avg: ClientBalanceAvgAggregateOutputType | null
     _sum: ClientBalanceSumAggregateOutputType | null
@@ -6137,6 +6190,7 @@ export namespace Prisma {
     coin?: boolean | CoinArgs
     coinId?: boolean
     balance?: boolean
+    isActive?: boolean
   }
 
   export type ClientBalanceInclude = {
@@ -6908,7 +6962,8 @@ export namespace Prisma {
     discountPercentage: 'discountPercentage',
     refoundCap: 'refoundCap',
     valideSince: 'valideSince',
-    valideTo: 'valideTo'
+    valideTo: 'valideTo',
+    isActive: 'isActive'
   };
 
   export type BenefitsScalarFieldEnum = (typeof BenefitsScalarFieldEnum)[keyof typeof BenefitsScalarFieldEnum]
@@ -6917,7 +6972,8 @@ export namespace Prisma {
   export const ClientBalanceScalarFieldEnum: {
     clientId: 'clientId',
     coinId: 'coinId',
-    balance: 'balance'
+    balance: 'balance',
+    isActive: 'isActive'
   };
 
   export type ClientBalanceScalarFieldEnum = (typeof ClientBalanceScalarFieldEnum)[keyof typeof ClientBalanceScalarFieldEnum]
@@ -6929,7 +6985,8 @@ export namespace Prisma {
     firstName: 'firstName',
     lastName: 'lastName',
     email: 'email',
-    phoneNumber: 'phoneNumber'
+    phoneNumber: 'phoneNumber',
+    isActive: 'isActive'
   };
 
   export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -6940,7 +6997,8 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     quotationReference: 'quotationReference',
-    annualPerformance: 'annualPerformance'
+    annualPerformance: 'annualPerformance',
+    isActive: 'isActive'
   };
 
   export type CoinScalarFieldEnum = (typeof CoinScalarFieldEnum)[keyof typeof CoinScalarFieldEnum]
@@ -6955,7 +7013,8 @@ export namespace Prisma {
     receiverWalletAddress: 'receiverWalletAddress',
     coinId: 'coinId',
     amount: 'amount',
-    fee: 'fee'
+    fee: 'fee',
+    isActive: 'isActive'
   };
 
   export type MovementDataScalarFieldEnum = (typeof MovementDataScalarFieldEnum)[keyof typeof MovementDataScalarFieldEnum]
@@ -6963,7 +7022,8 @@ export namespace Prisma {
 
   export const MovementScalarFieldEnum: {
     id: 'id',
-    type: 'type'
+    type: 'type',
+    isActive: 'isActive'
   };
 
   export type MovementScalarFieldEnum = (typeof MovementScalarFieldEnum)[keyof typeof MovementScalarFieldEnum]
@@ -7010,6 +7070,7 @@ export namespace Prisma {
     lastName?: StringFilter | string
     email?: StringFilter | string
     phoneNumber?: IntFilter | number
+    isActive?: BoolFilter | boolean
     movementData?: MovementDataListRelationFilter
     clientBalance?: ClientBalanceListRelationFilter
   }
@@ -7021,6 +7082,7 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phoneNumber?: SortOrder
+    isActive?: SortOrder
     movementData?: MovementDataOrderByRelationAggregateInput
     clientBalance?: ClientBalanceOrderByRelationAggregateInput
   }
@@ -7039,6 +7101,7 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phoneNumber?: SortOrder
+    isActive?: SortOrder
     _count?: ClientCountOrderByAggregateInput
     _avg?: ClientAvgOrderByAggregateInput
     _max?: ClientMaxOrderByAggregateInput
@@ -7056,6 +7119,7 @@ export namespace Prisma {
     lastName?: StringWithAggregatesFilter | string
     email?: StringWithAggregatesFilter | string
     phoneNumber?: IntWithAggregatesFilter | number
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type MovementWhereInput = {
@@ -7064,12 +7128,14 @@ export namespace Prisma {
     NOT?: Enumerable<MovementWhereInput>
     id?: IntFilter | number
     type?: StringFilter | string
+    isActive?: BoolFilter | boolean
     movementData?: MovementDataListRelationFilter
   }
 
   export type MovementOrderByWithRelationInput = {
     id?: SortOrder
     type?: SortOrder
+    isActive?: SortOrder
     movementData?: MovementDataOrderByRelationAggregateInput
   }
 
@@ -7080,6 +7146,7 @@ export namespace Prisma {
   export type MovementOrderByWithAggregationInput = {
     id?: SortOrder
     type?: SortOrder
+    isActive?: SortOrder
     _count?: MovementCountOrderByAggregateInput
     _avg?: MovementAvgOrderByAggregateInput
     _max?: MovementMaxOrderByAggregateInput
@@ -7093,6 +7160,7 @@ export namespace Prisma {
     NOT?: Enumerable<MovementScalarWhereWithAggregatesInput>
     id?: IntWithAggregatesFilter | number
     type?: StringWithAggregatesFilter | string
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type BenefitsWhereInput = {
@@ -7105,6 +7173,7 @@ export namespace Prisma {
     refoundCap?: DecimalFilter | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFilter | Date | string
     valideTo?: DateTimeFilter | Date | string
+    isActive?: BoolFilter | boolean
   }
 
   export type BenefitsOrderByWithRelationInput = {
@@ -7114,6 +7183,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    isActive?: SortOrder
   }
 
   export type BenefitsWhereUniqueInput = {
@@ -7127,6 +7197,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    isActive?: SortOrder
     _count?: BenefitsCountOrderByAggregateInput
     _avg?: BenefitsAvgOrderByAggregateInput
     _max?: BenefitsMaxOrderByAggregateInput
@@ -7144,6 +7215,7 @@ export namespace Prisma {
     refoundCap?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeWithAggregatesFilter | Date | string
     valideTo?: DateTimeWithAggregatesFilter | Date | string
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type CoinWhereInput = {
@@ -7155,6 +7227,7 @@ export namespace Prisma {
     description?: StringFilter | string
     quotationReference?: DecimalFilter | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter | boolean
     clientBalance?: ClientBalanceListRelationFilter
     movementData?: MovementDataListRelationFilter
   }
@@ -7165,6 +7238,7 @@ export namespace Prisma {
     description?: SortOrder
     quotationReference?: SortOrder
     annualPerformance?: SortOrder
+    isActive?: SortOrder
     clientBalance?: ClientBalanceOrderByRelationAggregateInput
     movementData?: MovementDataOrderByRelationAggregateInput
   }
@@ -7179,6 +7253,7 @@ export namespace Prisma {
     description?: SortOrder
     quotationReference?: SortOrder
     annualPerformance?: SortOrder
+    isActive?: SortOrder
     _count?: CoinCountOrderByAggregateInput
     _avg?: CoinAvgOrderByAggregateInput
     _max?: CoinMaxOrderByAggregateInput
@@ -7195,6 +7270,7 @@ export namespace Prisma {
     description?: StringWithAggregatesFilter | string
     quotationReference?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type MovementDataWhereInput = {
@@ -7213,6 +7289,7 @@ export namespace Prisma {
     coinId?: IntFilter | number
     amount?: DecimalFilter | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter | boolean
   }
 
   export type MovementDataOrderByWithRelationInput = {
@@ -7228,6 +7305,7 @@ export namespace Prisma {
     coinId?: SortOrder
     amount?: SortOrder
     fee?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementDataWhereUniqueInput = {
@@ -7244,6 +7322,7 @@ export namespace Prisma {
     coinId?: SortOrder
     amount?: SortOrder
     fee?: SortOrder
+    isActive?: SortOrder
     _count?: MovementDataCountOrderByAggregateInput
     _avg?: MovementDataAvgOrderByAggregateInput
     _max?: MovementDataMaxOrderByAggregateInput
@@ -7264,6 +7343,7 @@ export namespace Prisma {
     coinId?: IntWithAggregatesFilter | number
     amount?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
     fee?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type ClientBalanceWhereInput = {
@@ -7275,6 +7355,7 @@ export namespace Prisma {
     coin?: XOR<CoinRelationFilter, CoinWhereInput>
     coinId?: IntFilter | number
     balance?: DecimalFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter | boolean
   }
 
   export type ClientBalanceOrderByWithRelationInput = {
@@ -7283,6 +7364,7 @@ export namespace Prisma {
     coin?: CoinOrderByWithRelationInput
     coinId?: SortOrder
     balance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientBalanceWhereUniqueInput = {
@@ -7293,6 +7375,7 @@ export namespace Prisma {
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
+    isActive?: SortOrder
     _count?: ClientBalanceCountOrderByAggregateInput
     _avg?: ClientBalanceAvgOrderByAggregateInput
     _max?: ClientBalanceMaxOrderByAggregateInput
@@ -7307,6 +7390,7 @@ export namespace Prisma {
     clientId?: IntWithAggregatesFilter | number
     coinId?: IntWithAggregatesFilter | number
     balance?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolWithAggregatesFilter | boolean
   }
 
   export type ClientCreateInput = {
@@ -7315,6 +7399,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     movementData?: MovementDataCreateNestedManyWithoutClientInput
     clientBalance?: ClientBalanceCreateNestedManyWithoutClientInput
   }
@@ -7326,6 +7411,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     movementData?: MovementDataUncheckedCreateNestedManyWithoutClientInput
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutClientInput
   }
@@ -7336,6 +7422,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUpdateManyWithoutClientNestedInput
     clientBalance?: ClientBalanceUpdateManyWithoutClientNestedInput
   }
@@ -7347,6 +7434,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUncheckedUpdateManyWithoutClientNestedInput
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutClientNestedInput
   }
@@ -7358,6 +7446,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
   }
 
   export type ClientUpdateManyMutationInput = {
@@ -7366,6 +7455,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientUncheckedUpdateManyInput = {
@@ -7375,42 +7465,50 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementCreateInput = {
     type: string
+    isActive?: boolean
     movementData?: MovementDataCreateNestedManyWithoutMovementInput
   }
 
   export type MovementUncheckedCreateInput = {
     id?: number
     type: string
+    isActive?: boolean
     movementData?: MovementDataUncheckedCreateNestedManyWithoutMovementInput
   }
 
   export type MovementUpdateInput = {
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUpdateManyWithoutMovementNestedInput
   }
 
   export type MovementUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUncheckedUpdateManyWithoutMovementNestedInput
   }
 
   export type MovementCreateManyInput = {
     id?: number
     type: string
+    isActive?: boolean
   }
 
   export type MovementUpdateManyMutationInput = {
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BenefitsCreateInput = {
@@ -7419,6 +7517,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    isActive?: boolean
   }
 
   export type BenefitsUncheckedCreateInput = {
@@ -7428,6 +7527,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    isActive?: boolean
   }
 
   export type BenefitsUpdateInput = {
@@ -7436,6 +7536,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BenefitsUncheckedUpdateInput = {
@@ -7445,6 +7546,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BenefitsCreateManyInput = {
@@ -7454,6 +7556,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    isActive?: boolean
   }
 
   export type BenefitsUpdateManyMutationInput = {
@@ -7462,6 +7565,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type BenefitsUncheckedUpdateManyInput = {
@@ -7471,6 +7575,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CoinCreateInput = {
@@ -7478,6 +7583,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     clientBalance?: ClientBalanceCreateNestedManyWithoutCoinInput
     movementData?: MovementDataCreateNestedManyWithoutCoinInput
   }
@@ -7488,6 +7594,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutCoinInput
     movementData?: MovementDataUncheckedCreateNestedManyWithoutCoinInput
   }
@@ -7497,6 +7604,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUpdateManyWithoutCoinNestedInput
     movementData?: MovementDataUpdateManyWithoutCoinNestedInput
   }
@@ -7507,6 +7615,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutCoinNestedInput
     movementData?: MovementDataUncheckedUpdateManyWithoutCoinNestedInput
   }
@@ -7517,6 +7626,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type CoinUpdateManyMutationInput = {
@@ -7524,6 +7634,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CoinUncheckedUpdateManyInput = {
@@ -7532,6 +7643,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataCreateInput = {
@@ -7543,6 +7655,7 @@ export namespace Prisma {
     coin: CoinCreateNestedOneWithoutMovementDataInput
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUncheckedCreateInput = {
@@ -7555,6 +7668,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUpdateInput = {
@@ -7566,6 +7680,7 @@ export namespace Prisma {
     coin?: CoinUpdateOneRequiredWithoutMovementDataNestedInput
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateInput = {
@@ -7578,6 +7693,7 @@ export namespace Prisma {
     coinId?: IntFieldUpdateOperationsInput | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataCreateManyInput = {
@@ -7590,6 +7706,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUpdateManyMutationInput = {
@@ -7598,6 +7715,7 @@ export namespace Prisma {
     receiverWalletAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateManyInput = {
@@ -7610,46 +7728,54 @@ export namespace Prisma {
     coinId?: IntFieldUpdateOperationsInput | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceCreateInput = {
     client: ClientCreateNestedOneWithoutClientBalanceInput
     coin: CoinCreateNestedOneWithoutClientBalanceInput
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUncheckedCreateInput = {
     clientId: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUpdateInput = {
     client?: ClientUpdateOneRequiredWithoutClientBalanceNestedInput
     coin?: CoinUpdateOneRequiredWithoutClientBalanceNestedInput
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateInput = {
     clientId?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceCreateManyInput = {
     clientId: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUpdateManyMutationInput = {
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateManyInput = {
     clientId?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IntFilter = {
@@ -7676,6 +7802,11 @@ export namespace Prisma {
     endsWith?: string
     mode?: QueryMode
     not?: NestedStringFilter | string
+  }
+
+  export type BoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
   }
 
   export type MovementDataListRelationFilter = {
@@ -7705,6 +7836,7 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phoneNumber?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientAvgOrderByAggregateInput = {
@@ -7719,6 +7851,7 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phoneNumber?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientMinOrderByAggregateInput = {
@@ -7728,6 +7861,7 @@ export namespace Prisma {
     lastName?: SortOrder
     email?: SortOrder
     phoneNumber?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientSumOrderByAggregateInput = {
@@ -7769,9 +7903,18 @@ export namespace Prisma {
     _max?: NestedStringFilter
   }
 
+  export type BoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
+  }
+
   export type MovementCountOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementAvgOrderByAggregateInput = {
@@ -7781,11 +7924,13 @@ export namespace Prisma {
   export type MovementMaxOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementMinOrderByAggregateInput = {
     id?: SortOrder
     type?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementSumOrderByAggregateInput = {
@@ -7821,6 +7966,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    isActive?: SortOrder
   }
 
   export type BenefitsAvgOrderByAggregateInput = {
@@ -7836,6 +7982,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    isActive?: SortOrder
   }
 
   export type BenefitsMinOrderByAggregateInput = {
@@ -7845,6 +7992,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    isActive?: SortOrder
   }
 
   export type BenefitsSumOrderByAggregateInput = {
@@ -7889,6 +8037,7 @@ export namespace Prisma {
     description?: SortOrder
     quotationReference?: SortOrder
     annualPerformance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type CoinAvgOrderByAggregateInput = {
@@ -7903,6 +8052,7 @@ export namespace Prisma {
     description?: SortOrder
     quotationReference?: SortOrder
     annualPerformance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type CoinMinOrderByAggregateInput = {
@@ -7911,6 +8061,7 @@ export namespace Prisma {
     description?: SortOrder
     quotationReference?: SortOrder
     annualPerformance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type CoinSumOrderByAggregateInput = {
@@ -7944,6 +8095,7 @@ export namespace Prisma {
     coinId?: SortOrder
     amount?: SortOrder
     fee?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementDataAvgOrderByAggregateInput = {
@@ -7965,6 +8117,7 @@ export namespace Prisma {
     coinId?: SortOrder
     amount?: SortOrder
     fee?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementDataMinOrderByAggregateInput = {
@@ -7977,6 +8130,7 @@ export namespace Prisma {
     coinId?: SortOrder
     amount?: SortOrder
     fee?: SortOrder
+    isActive?: SortOrder
   }
 
   export type MovementDataSumOrderByAggregateInput = {
@@ -7997,6 +8151,7 @@ export namespace Prisma {
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientBalanceAvgOrderByAggregateInput = {
@@ -8009,12 +8164,14 @@ export namespace Prisma {
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientBalanceMinOrderByAggregateInput = {
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
+    isActive?: SortOrder
   }
 
   export type ClientBalanceSumOrderByAggregateInput = {
@@ -8061,6 +8218,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type MovementDataUpdateManyWithoutClientNestedInput = {
@@ -8352,6 +8513,11 @@ export namespace Prisma {
     not?: NestedStringFilter | string
   }
 
+  export type NestedBoolFilter = {
+    equals?: boolean
+    not?: NestedBoolFilter | boolean
+  }
+
   export type NestedIntWithAggregatesFilter = {
     equals?: number
     in?: Enumerable<number>
@@ -8394,6 +8560,14 @@ export namespace Prisma {
     _count?: NestedIntFilter
     _min?: NestedStringFilter
     _max?: NestedStringFilter
+  }
+
+  export type NestedBoolWithAggregatesFilter = {
+    equals?: boolean
+    not?: NestedBoolWithAggregatesFilter | boolean
+    _count?: NestedIntFilter
+    _min?: NestedBoolFilter
+    _max?: NestedBoolFilter
   }
 
   export type NestedDecimalFilter = {
@@ -8456,6 +8630,7 @@ export namespace Prisma {
     coin: CoinCreateNestedOneWithoutMovementDataInput
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUncheckedCreateWithoutClientInput = {
@@ -8467,6 +8642,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataCreateOrConnectWithoutClientInput = {
@@ -8482,11 +8658,13 @@ export namespace Prisma {
   export type ClientBalanceCreateWithoutClientInput = {
     coin: CoinCreateNestedOneWithoutClientBalanceInput
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUncheckedCreateWithoutClientInput = {
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceCreateOrConnectWithoutClientInput = {
@@ -8528,6 +8706,7 @@ export namespace Prisma {
     coinId?: IntFilter | number
     amount?: DecimalFilter | Decimal | DecimalJsLike | number | string
     fee?: DecimalFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter | boolean
   }
 
   export type ClientBalanceUpsertWithWhereUniqueWithoutClientInput = {
@@ -8553,6 +8732,7 @@ export namespace Prisma {
     clientId?: IntFilter | number
     coinId?: IntFilter | number
     balance?: DecimalFilter | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFilter | boolean
   }
 
   export type MovementDataCreateWithoutMovementInput = {
@@ -8563,6 +8743,7 @@ export namespace Prisma {
     coin: CoinCreateNestedOneWithoutMovementDataInput
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUncheckedCreateWithoutMovementInput = {
@@ -8574,6 +8755,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataCreateOrConnectWithoutMovementInput = {
@@ -8605,11 +8787,13 @@ export namespace Prisma {
   export type ClientBalanceCreateWithoutCoinInput = {
     client: ClientCreateNestedOneWithoutClientBalanceInput
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUncheckedCreateWithoutCoinInput = {
     clientId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceCreateOrConnectWithoutCoinInput = {
@@ -8630,6 +8814,7 @@ export namespace Prisma {
     receiverWalletAddress: string
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUncheckedCreateWithoutCoinInput = {
@@ -8641,6 +8826,7 @@ export namespace Prisma {
     receiverWalletAddress: string
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataCreateOrConnectWithoutCoinInput = {
@@ -8691,6 +8877,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     clientBalance?: ClientBalanceCreateNestedManyWithoutClientInput
   }
 
@@ -8701,6 +8888,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -8711,11 +8899,13 @@ export namespace Prisma {
 
   export type MovementCreateWithoutMovementDataInput = {
     type: string
+    isActive?: boolean
   }
 
   export type MovementUncheckedCreateWithoutMovementDataInput = {
     id?: number
     type: string
+    isActive?: boolean
   }
 
   export type MovementCreateOrConnectWithoutMovementDataInput = {
@@ -8728,6 +8918,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     clientBalance?: ClientBalanceCreateNestedManyWithoutCoinInput
   }
 
@@ -8737,6 +8928,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutCoinInput
   }
 
@@ -8756,6 +8948,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUpdateManyWithoutClientNestedInput
   }
 
@@ -8766,6 +8959,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -8776,11 +8970,13 @@ export namespace Prisma {
 
   export type MovementUpdateWithoutMovementDataInput = {
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementUncheckedUpdateWithoutMovementDataInput = {
     id?: IntFieldUpdateOperationsInput | number
     type?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type CoinUpsertWithoutMovementDataInput = {
@@ -8793,6 +8989,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUpdateManyWithoutCoinNestedInput
   }
 
@@ -8802,6 +8999,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutCoinNestedInput
   }
 
@@ -8811,6 +9009,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     movementData?: MovementDataCreateNestedManyWithoutClientInput
   }
 
@@ -8821,6 +9020,7 @@ export namespace Prisma {
     lastName: string
     email: string
     phoneNumber: number
+    isActive?: boolean
     movementData?: MovementDataUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -8834,6 +9034,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     movementData?: MovementDataCreateNestedManyWithoutCoinInput
   }
 
@@ -8843,6 +9044,7 @@ export namespace Prisma {
     description: string
     quotationReference: Decimal | DecimalJsLike | number | string
     annualPerformance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
     movementData?: MovementDataUncheckedCreateNestedManyWithoutCoinInput
   }
 
@@ -8862,6 +9064,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUpdateManyWithoutClientNestedInput
   }
 
@@ -8872,6 +9075,7 @@ export namespace Prisma {
     lastName?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -8885,6 +9089,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUpdateManyWithoutCoinNestedInput
   }
 
@@ -8894,6 +9099,7 @@ export namespace Prisma {
     description?: StringFieldUpdateOperationsInput | string
     quotationReference?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     annualPerformance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     movementData?: MovementDataUncheckedUpdateManyWithoutCoinNestedInput
   }
 
@@ -8906,11 +9112,13 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceCreateManyClientInput = {
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUpdateWithoutClientInput = {
@@ -8921,6 +9129,7 @@ export namespace Prisma {
     coin?: CoinUpdateOneRequiredWithoutMovementDataNestedInput
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateWithoutClientInput = {
@@ -8932,6 +9141,7 @@ export namespace Prisma {
     coinId?: IntFieldUpdateOperationsInput | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateManyWithoutMovementDataInput = {
@@ -8943,21 +9153,25 @@ export namespace Prisma {
     coinId?: IntFieldUpdateOperationsInput | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUpdateWithoutClientInput = {
     coin?: CoinUpdateOneRequiredWithoutClientBalanceNestedInput
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateWithoutClientInput = {
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateManyWithoutClientBalanceInput = {
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataCreateManyMovementInput = {
@@ -8969,6 +9183,7 @@ export namespace Prisma {
     coinId: number
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataUpdateWithoutMovementInput = {
@@ -8979,6 +9194,7 @@ export namespace Prisma {
     coin?: CoinUpdateOneRequiredWithoutMovementDataNestedInput
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateWithoutMovementInput = {
@@ -8990,11 +9206,13 @@ export namespace Prisma {
     coinId?: IntFieldUpdateOperationsInput | number
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceCreateManyCoinInput = {
     clientId: number
     balance: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type MovementDataCreateManyCoinInput = {
@@ -9006,16 +9224,19 @@ export namespace Prisma {
     receiverWalletAddress: string
     amount: Decimal | DecimalJsLike | number | string
     fee: Decimal | DecimalJsLike | number | string
+    isActive?: boolean
   }
 
   export type ClientBalanceUpdateWithoutCoinInput = {
     client?: ClientUpdateOneRequiredWithoutClientBalanceNestedInput
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateWithoutCoinInput = {
     clientId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUpdateWithoutCoinInput = {
@@ -9026,6 +9247,7 @@ export namespace Prisma {
     receiverWalletAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type MovementDataUncheckedUpdateWithoutCoinInput = {
@@ -9037,6 +9259,7 @@ export namespace Prisma {
     receiverWalletAddress?: StringFieldUpdateOperationsInput | string
     amount?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     fee?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
 
