@@ -15,7 +15,7 @@ model Client {
   lastName     String
   email        String         @unique
   phoneNumber  Int            @unique
-  isActive      Boolean
+  
   movementData MovementData[]
 }
 
@@ -26,7 +26,7 @@ model Benefits {
   refoundCap         Float
   valideSince        DateTime
   valideTo           DateTime
-  isActive      Boolean
+  
 }
 
 model Coin {
@@ -35,7 +35,7 @@ model Coin {
   description        String
   quotationReference Float
   annualPerformance  Float
-  isActive      Boolean
+  
   movementData       MovementData[]
 }
 
@@ -51,5 +51,5 @@ model MovementData {
   coinId                String
   amount                Float
   fee                   Float
-  isActive      Boolean
+  
 }
