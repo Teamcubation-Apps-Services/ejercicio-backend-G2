@@ -33,9 +33,12 @@ export const updateBenefitRepository = async (req: Request, res: Response): Prom
 
 export const deleteBenefitRepository = async (req: Request, res: Response): Promise<Benefits> => {
   const { id } = req.params
-  return await prisma.benefits.delete({
+  return await prisma.benefits.update({
     where: {
       id: Number(id)
+    },
+    data: {
+      isActive: false
     }
   })
 }
