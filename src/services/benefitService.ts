@@ -3,20 +3,36 @@ import { createBenefitRepository, deleteBenefitRepository, getAllBenefitsReposit
 
 export const getAllBenefits = async (req: Request, res: Response): Promise<void> => {
   const benefits = await getAllBenefitsRepository(req, res)
-  res.status(200).json(benefits)
+  if (benefits instanceof Error) {
+    res.status(400).json({ message: benefits.message })
+  } else {
+    res.status(200).json(benefits)
+  }
 }
 
 export const createBenefit = async (req: Request, res: Response): Promise<void> => {
   const benefit = await createBenefitRepository(req, res)
-  res.status(201).json(benefit)
+  if (benefit instanceof Error) {
+    res.status(400).json({ message: benefit.message })
+  } else {
+    res.status(201).json(benefit)
+  }
 }
 
 export const updateBenefit = async (req: Request, res: Response): Promise<void> => {
-  await updateBenefitRepository(req, res)
-  res.status(204)
+  const updated = await updateBenefitRepository(req, res)
+  if (updated instanceof Error) {
+    res.status(400).json({ message: updated.message })
+  } else {
+    res.status(200).json(updated)
+  }
 }
 
 export const deleteBenefit = async (req: Request, res: Response): Promise<void> => {
-  await deleteBenefitRepository(req, res)
-  res.status(204)
+  const deleted = await deleteBenefitRepository(req, res)
+  if (deleted instanceof Error) {
+    res.status(400).json({ message: deleted.message })
+  } else {
+    res.status(200).json(deleted)
+  }
 }

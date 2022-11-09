@@ -3,42 +3,66 @@ import { PrismaClient as SqlClient, Benefits } from '../../prisma/generated/sql-
 
 const prisma = new SqlClient()
 
-export const getAllBenefitsRepository = async (req: Request, res: Response): Promise<Benefits[]> => {
-  return await prisma.benefits.findMany({})
+const ERRORS = {
+  BAD_REQ: new Error('Bad Request')
 }
 
-export const createBenefitRepository = async (req: Request, res: Response): Promise<Benefits> => {
+export const getAllBenefitsRepository = async (req: Request, res: Response): Promise<Benefits[] | Error> => {
+  try {
+    return await prisma.benefits.findMany({
+      where: {
+        isActive: true
+      }
+    })
+  } catch (e) {
+    return ERRORS.BAD_REQ
+  }
+}
+
+export const createBenefitRepository = async (req: Request, res: Response): Promise<Benefits | Error> => {
   const { name, discountPercentage, refoundCap, valideSince, valideTo } = req.body
-  return await prisma.benefits.create({
-    data: {
-      name,
-      discountPercentage,
-      refoundCap,
-      valideSince: new Date(valideSince),
-      valideTo: new Date(valideTo)
-    }
-  })
+  try {
+    return await prisma.benefits.create({
+      data: {
+        name,
+        discountPercentage,
+        refoundCap,
+        valideSince: new Date(valideSince),
+        valideTo: new Date(valideTo)
+      }
+    })
+  } catch (e) {
+    return ERRORS.BAD_REQ
+  }
 }
 
-export const updateBenefitRepository = async (req: Request, res: Response): Promise<Benefits> => {
-  const data = req.body
-  const { id } = req.params
-  return await prisma.benefits.update({
-    where: {
-      id: Number(id)
-    },
-    data
-  })
+export const updateBenefitRepository = async (req: Request, res: Response): Promise<Benefits | Error> => {
+  try {
+    const data = req.body
+    const { id } = req.params
+    return await prisma.benefits.update({
+      where: {
+        id: Number(id)
+      },
+      data
+    })
+  } catch (e) {
+    return ERRORS.BAD_REQ
+  }
 }
 
-export const deleteBenefitRepository = async (req: Request, res: Response): Promise<Benefits> => {
-  const { id } = req.params
-  return await prisma.benefits.update({
-    where: {
-      id: Number(id)
-    },
-    data: {
-      isActive: false
-    }
-  })
+export const deleteBenefitRepository = async (req: Request, res: Response): Promise<Benefits | Error> => {
+  try {
+    const { id } = req.params
+    return await prisma.benefits.update({
+      where: {
+        id: Number(id)
+      },
+      data: {
+        isActive: false
+      }
+    })
+  } catch (e) {
+    return ERRORS.BAD_REQ
+  }
 }
