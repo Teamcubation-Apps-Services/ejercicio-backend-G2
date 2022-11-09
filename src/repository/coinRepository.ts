@@ -40,11 +40,13 @@ export const updateCoinRepository = async (req: Request, res: Response) : Promis
 
 export const deleteCoinRepository = async (req: Request, res: Response) : Promise<Coin> => {
   const id = Number(req.params.id)
-  console.log("Se eliminó piola");
 
-  return await prisma.coin.delete({
+  return await prisma.coin.update({
     where: {
       id
+    },
+    data: {
+      isActive: false
     }
   })
 }

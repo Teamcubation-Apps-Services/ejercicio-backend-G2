@@ -4,6 +4,7 @@ import coinRouter from './routes/coinRouter'
 import movementRouter from './routes/movementRouter'
 import clientRouter from './routes/clientRouter'
 import clientBalanceRouter from './routes/clientBalanceRouter'
+import movementDataRouter from './routes/movementDataRouter'
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use('/coins', coinRouter)
 app.use('/movements', movementRouter)
 app.use('/clients', clientRouter)
 app.use('/balances', clientBalanceRouter)
+app.use('/movementdata', movementDataRouter)
 
 const PORT = process.env.PORT || 3000
 

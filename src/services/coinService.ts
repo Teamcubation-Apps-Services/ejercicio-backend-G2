@@ -23,5 +23,5 @@ export const updateCoin = async (req: Request, res: Response): Promise<void> => 
 
 export const deleteCoin = async (req: Request, res: Response): Promise<void> => {
     await deleteCoinRepository(req,res)
-    
+    res.status(204)
 }

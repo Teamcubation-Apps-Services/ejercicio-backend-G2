@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { deleteCoinController, getAllCoinsController, getCoinController, postCoinController, updateCoinController } from '../controllers/coinController'
+import { getAllCoinsController, getCoinController, postCoinController, updateCoinController, deleteCoinController } from '../controllers/coinController'
 
 const coins = Router()
 
