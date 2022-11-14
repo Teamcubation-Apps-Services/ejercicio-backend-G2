@@ -3,10 +3,6 @@ import { PrismaClient as SqlClient, Benefits } from '../../prisma/generated/sql-
 
 const prisma = new SqlClient()
 
-const ERRORS = {
-  BAD_REQ: new Error('Bad Request')
-}
-
 export const getAllBenefitsRepository = async (req: Request, res: Response): Promise<Benefits[] | Error> => {
   try {
     return await prisma.benefits.findMany({
@@ -14,8 +10,8 @@ export const getAllBenefitsRepository = async (req: Request, res: Response): Pro
         isActive: true
       }
     })
-  } catch (e) {
-    return ERRORS.BAD_REQ
+  } catch (e: any) {
+    return new Error(e.meta.cause)
   }
 }
 
@@ -31,8 +27,8 @@ export const createBenefitRepository = async (req: Request, res: Response): Prom
         valideTo: new Date(valideTo)
       }
     })
-  } catch (e) {
-    return ERRORS.BAD_REQ
+  } catch (e: any) {
+    return new Error(e.meta.cause)
   }
 }
 
@@ -40,29 +36,51 @@ export const updateBenefitRepository = async (req: Request, res: Response): Prom
   try {
     const data = req.body
     const { id } = req.params
-    return await prisma.benefits.update({
+    const benefit = await prisma.benefits.findUnique({
       where: {
         id: Number(id)
-      },
-      data
+      }
     })
-  } catch (e) {
-    return ERRORS.BAD_REQ
+    if (benefit !== null && benefit.isActive) {
+      return await prisma.benefits.update({
+        where: {
+          id: Number(id)
+        },
+        data
+      })
+    } else {
+      return new Error('Invalid id')
+    }
+  } catch (e: any) {
+    return new Error(e.meta.cause)
   }
 }
 
 export const deleteBenefitRepository = async (req: Request, res: Response): Promise<Benefits | Error> => {
   try {
     const { id } = req.params
-    return await prisma.benefits.update({
+    const benefit = await prisma.benefits.findUnique({
       where: {
         id: Number(id)
       },
-      data: {
-        isActive: false
-      }
     })
-  } catch (e) {
-    return ERRORS.BAD_REQ
+    if (benefit !== null) {
+      if (benefit.isActive) {
+        return await prisma.benefits.update({
+          where: {
+            id: Number(id)
+          },
+          data: {
+            isActive: false
+          }
+        })
+      } else {
+        return new Error('Benefit already deleted')
+      }
+    } else {
+      return new Error('Record not found')
+    }
+  } catch (e: any) {
+    return new Error(e.meta.cause)
   }
 }
