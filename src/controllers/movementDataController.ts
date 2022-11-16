@@ -6,7 +6,7 @@ export const getAllMovementDataController = async (_: Request, res: Response, ne
       await getAllMovementData(_, res)
       next()
     } catch (e) {
-      console.log(e)
+        console.log(`Error: ${e}`)
     }
   }
   
@@ -15,16 +15,18 @@ export const getAllMovementDataController = async (_: Request, res: Response, ne
           await getMovementData(req,res)
           next()
       }catch(e){
-          console.log(e)
+        console.log(`Error: ${e}`)
       }
   }
   
   export const postMovementDataController = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
       try{
-          await postMovementData(req,res)
+        const { clientId, movementId, senderWalletAddress, receiverWalletAddress, coinId, amount, fee } = req.body
+        if (clientId && movementId && senderWalletAddress && receiverWalletAddress && coinId && amount && fee) await postMovementData(req,res)
+        else res.status(400).send('Missing value')
           next()
       }catch(e){
-          console.log(e)
+        console.log(`Error: ${e}`)
       }
   }
   
@@ -33,7 +35,7 @@ export const getAllMovementDataController = async (_: Request, res: Response, ne
           await updateMovementData(req,res)
           next()
       }catch(e){
-          console.log(e)
+        console.log(`Error: ${e}`)
       }
   }
   
@@ -42,6 +44,6 @@ export const getAllMovementDataController = async (_: Request, res: Response, ne
           await deleteMovementData(req,res)
           next()
       }catch(e){
-          console.log(e)
+        console.log(`Error: ${e}`)
       }
   }

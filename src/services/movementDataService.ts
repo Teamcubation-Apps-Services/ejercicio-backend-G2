@@ -2,26 +2,46 @@ import { Request, Response } from 'express'
 import { getAllMovmentDataRepository, getMovementDataRepository, postMovementDataRepository, updateMovementDataRepository, deleteMovementDataRepository } from '../repository/movementDataRepository'
 
 export const getAllMovementData = async (req: Request, res: Response): Promise<void> => {
-  const coins = await getAllMovmentDataRepository(req, res)
-  res.status(200).json(coins)
+  const movementsData = await getAllMovmentDataRepository(req, res)
+  if (movementsData instanceof Error) {
+    res.status(400).json({ message: movementsData.message })
+  } else {
+    res.status(200).json(movementsData)
+  }
 }
 
 export const getMovementData = async (req: Request, res: Response): Promise<void> => {
-    const coin = await getMovementDataRepository(req, res)
-    res.status(200).json(coin)
+    const movementData = await getMovementDataRepository(req, res)
+    if (movementData instanceof Error) {
+        res.status(400).json({ message: movementData.message })
+    } else {
+        res.status(200).json(movementData)
+    }
 }
 
 export const postMovementData = async (req: Request, res: Response): Promise<void> => {
-    const coin = await postMovementDataRepository(req, res)
-    res.status(201).json(coin)
+    const movementData = await postMovementDataRepository(req, res)
+    if (movementData instanceof Error) {
+        res.status(400).json({ message: movementData.message })
+    } else {
+        res.status(201).json(movementData)
+    }
 }
 
 export const updateMovementData = async (req: Request, res: Response): Promise<void> => {
-    const coin = await updateMovementDataRepository(req, res)
-    res.status(201).json(coin)
+    const movementData = await updateMovementDataRepository(req, res)
+    if (movementData instanceof Error) {
+        res.status(400).json({ message: movementData.message })
+    } else {
+        res.status(200).json(movementData)
+    }
 }
 
 export const deleteMovementData = async (req: Request, res: Response): Promise<void> => {
-    await deleteMovementDataRepository(req,res)
-    res.status(204)
+    const movementData = await deleteMovementDataRepository(req,res)
+    if (movementData instanceof Error) {
+        res.status(400).json({ message: movementData.message })
+    } else {
+        res.status(204)
+    }
 }
