@@ -11,12 +11,15 @@ export const getAllMovementsController = async (_: Request, res: Response, next:
 }
 export const createMovementController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    await createMovement(req, res)
+    const { id, type } = req.body
+    if (id && type) await createMovement(req, res)
+    else res.status(400).send('Missing value')
     next()
   } catch (e) {
     console.log(`Error: ${e}`)
   }
 }
+
 
 export const updateMovementController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
