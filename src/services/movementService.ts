@@ -3,20 +3,35 @@ import { createMovementRepository, deleteMovementRepository, getAllMovementsRepo
 
 export const getAllMovements = async (req: Request, res: Response): Promise<void> => {
   const movements = await getAllMovementsRepository(req, res)
-  res.status(200).json(movements)
+  if (movements instanceof Error) {
+    res.status(400).json({ message: movements.message })
+  } else res.status(200).json(movements)
 }
 
 export const createMovement = async (req: Request, res: Response): Promise<void> => {
   const movement = await createMovementRepository(req, res)
-  res.status(201).json(movement)
+  if (movement instanceof Error) {
+    res.status(400).json({ message: movement.message })
+  } else {
+    res.status(201).json(movement)
+  }
 }
 
 export const updateMovement = async (req: Request, res: Response): Promise<void> => {
-  await updateMovementRepository(req, res)
-  res.status(204)
+  const updated = await updateMovementRepository(req, res)
+  if (updated instanceof Error) {
+    res.status(400).json({ message: updated.message })
+  } else {
+    res.status(200).json(updated)
+  }
 }
 
 export const deleteMovement = async (req: Request, res: Response): Promise<void> => {
-  await deleteMovementRepository(req, res)
+  const deleted = await deleteMovementRepository(req, res)
+  if (deleted instanceof Error) {
+    res.status(400).json({ message: deleted.message })
+  } else {
+    res.status(200).json(deleted)
+  }
   res.status(204)
 }

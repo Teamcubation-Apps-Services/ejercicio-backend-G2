@@ -3,63 +3,89 @@ import { PrismaClient as SqlClient, ClientBalance } from '../../prisma/generated
 
 const prisma = new SqlClient()
 
-export const getAllClientBalancesRepository = async (req: Request, res: Response): Promise<ClientBalance[]> => {
-  const { clientId } = req.params
-  const balances = await prisma.clientBalance.findMany({
-    where: {
-      clientId: Number(clientId)
-    }
-  })
-  return balances
-}
-
-export const getClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | null> => {
-  const { clientId, coinId } = req.params
-  const balance = await prisma.clientBalance.findUnique({
-    where: {
-      clientId_coinId: {
+export const getAllClientBalancesRepository = async (req: Request, res: Response): Promise<ClientBalance[] | Error> => {
+  try {
+    const { clientId } = req.params
+    return await prisma.clientBalance.findMany({
+      where: {
         clientId: Number(clientId),
-        coinId: Number(coinId)
+        isActive: true
       }
-    }
-  })
-  return balance
+    })
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
 }
 
-export const createClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance> => {
-  const data = req.body
-  return await prisma.clientBalance.create({ data })
+export const getClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error | null> => {
+  try {
+    const { clientId, coinId } = req.params
+    const balance = await prisma.clientBalance.findUnique({
+      where: {
+        clientId_coinId: {
+          clientId: Number(clientId),
+          coinId: Number(coinId)
+        }
+      }
+    })
+    if (balance !== null && balance.isActive) {
+      return balance
+    } else {
+      return new Error('Balance not found')
+    }
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
 }
 
-export const updateClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance> => {
-  const { clientId, coinId } = req.params
-  const { balance } = req.body
-  const updated = await prisma.clientBalance.update({
-    where: {
-      clientId_coinId: {
-        clientId: Number(clientId),
-        coinId: Number(coinId)
-      }
-    },
-    data: {
-      balance: Number(balance)
-    }
-  })
-  return updated
+export const createClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error> => {
+  try {
+    const data = req.body
+    return await prisma.clientBalance.create({ data })
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
 }
 
-export const deleteClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance> => {
-  const { clientId, coinId } = req.params
-  const deleted = await prisma.clientBalance.update({
-    where: {
-      clientId_coinId: {
-        clientId: Number(clientId),
-        coinId: Number(coinId)
+export const updateClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error> => {
+  try {
+    const { clientId, coinId } = req.params
+    const { balance } = req.body
+    const clientBalance = await prisma.clientBalance.update({
+      where: {
+        clientId_coinId: {
+          clientId: Number(clientId),
+          coinId: Number(coinId)
+        }
+      },
+      data: {
+        balance: Number(balance)
       }
-    },
-    data: {
-      isActive: false
-    }
-  })
-  return deleted
+    })
+    if (clientBalance !== null && clientBalance.isActive) return clientBalance
+    else return new Error('Fail to update. Balance not found')
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
+}
+
+export const deleteClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error> => {
+  try {
+    const { clientId, coinId } = req.params
+    const clientBalance = await prisma.clientBalance.update({
+      where: {
+        clientId_coinId: {
+          clientId: Number(clientId),
+          coinId: Number(coinId)
+        }
+      },
+      data: {
+        isActive: false
+      }
+    })
+    if (clientBalance !== null && clientBalance.isActive) return clientBalance
+    else return new Error('Fail to delete. Balance not found')
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
 }
