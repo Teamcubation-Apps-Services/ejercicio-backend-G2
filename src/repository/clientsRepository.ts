@@ -63,7 +63,7 @@ export const deleteClientRepository = async (req: Request, res: Response): Promi
     const client = await prisma.client.findUnique({
       where: {
         id: Number(id)
-      },
+      }
     })
     if (client !== null) {
       if (client.isActive) {
