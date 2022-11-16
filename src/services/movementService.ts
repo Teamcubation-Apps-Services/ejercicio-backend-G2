@@ -5,8 +5,7 @@ export const getAllMovements = async (req: Request, res: Response): Promise<void
   const movements = await getAllMovementsRepository(req, res)
   if (movements instanceof Error) {
     res.status(400).json({ message: movements.message })
-  }
-  else res.status(200).json(movements)
+  } else res.status(200).json(movements)
 }
 
 export const createMovement = async (req: Request, res: Response): Promise<void> => {
