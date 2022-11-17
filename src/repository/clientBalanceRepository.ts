@@ -40,10 +40,26 @@ export const getClientBalanceRepository = async (req: Request, res: Response): P
 
 export const createClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error> => {
   try {
-    const data = req.body
-    return await prisma.clientBalance.create({ data })
+    const { clientId, coinId, balance } = req.body
+    return await prisma.clientBalance.upsert({ 
+      where: {
+        clientId_coinId: {
+          clientId,
+          coinId,
+        }
+     },
+     update: {
+      isActive: true,
+      balance
+     },
+     create: {
+      clientId,
+      coinId,
+      balance
+     }
+    })
   } catch (e: any) {
-    return new Error(e.meta.cause)
+    return new Error(e.meta.cause || 'Invalid clientId/coinId pair')
   }
 }
 
@@ -83,7 +99,7 @@ export const deleteClientBalanceRepository = async (req: Request, res: Response)
         isActive: false
       }
     })
-    if (clientBalance !== null && clientBalance.isActive) return clientBalance
+    if (clientBalance !== null) return clientBalance
     else return new Error('Fail to delete. Balance not found')
   } catch (e: any) {
     return new Error(e.meta.cause)
