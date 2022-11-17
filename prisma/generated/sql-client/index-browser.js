@@ -99,6 +99,7 @@ exports.Prisma.BenefitsScalarFieldEnum = makeEnum({
 });
 
 exports.Prisma.ClientBalanceScalarFieldEnum = makeEnum({
+  id: 'id',
   clientId: 'clientId',
   coinId: 'coinId',
   balance: 'balance',

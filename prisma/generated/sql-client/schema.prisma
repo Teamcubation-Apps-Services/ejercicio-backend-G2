@@ -65,11 +65,12 @@ model MovementData {
 }
 
 model ClientBalance {
+  id       Int      @id @default(autoincrement())
   client   Client  @relation(fields: [clientId], references: [id])
   clientId Int
   coin     Coin    @relation(fields: [coinId], references: [id])
   coinId   Int
   balance  Decimal
   isActive     Boolean  @default(true)
-  @@id([clientId, coinId])
+  @@unique([clientId, coinId])
 }

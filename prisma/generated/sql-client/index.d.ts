@@ -85,6 +85,7 @@ export type MovementData = {
  * 
  */
 export type ClientBalance = {
+  id: number
   clientId: number
   coinId: number
   balance: Prisma.Decimal
@@ -5998,18 +5999,21 @@ export namespace Prisma {
   }
 
   export type ClientBalanceAvgAggregateOutputType = {
+    id: number | null
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
   }
 
   export type ClientBalanceSumAggregateOutputType = {
+    id: number | null
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
   }
 
   export type ClientBalanceMinAggregateOutputType = {
+    id: number | null
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
@@ -6017,6 +6021,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceMaxAggregateOutputType = {
+    id: number | null
     clientId: number | null
     coinId: number | null
     balance: Decimal | null
@@ -6024,6 +6029,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCountAggregateOutputType = {
+    id: number
     clientId: number
     coinId: number
     balance: number
@@ -6033,18 +6039,21 @@ export namespace Prisma {
 
 
   export type ClientBalanceAvgAggregateInputType = {
+    id?: true
     clientId?: true
     coinId?: true
     balance?: true
   }
 
   export type ClientBalanceSumAggregateInputType = {
+    id?: true
     clientId?: true
     coinId?: true
     balance?: true
   }
 
   export type ClientBalanceMinAggregateInputType = {
+    id?: true
     clientId?: true
     coinId?: true
     balance?: true
@@ -6052,6 +6061,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceMaxAggregateInputType = {
+    id?: true
     clientId?: true
     coinId?: true
     balance?: true
@@ -6059,6 +6069,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCountAggregateInputType = {
+    id?: true
     clientId?: true
     coinId?: true
     balance?: true
@@ -6159,6 +6170,7 @@ export namespace Prisma {
 
 
   export type ClientBalanceGroupByOutputType = {
+    id: number
     clientId: number
     coinId: number
     balance: Decimal
@@ -6185,6 +6197,7 @@ export namespace Prisma {
 
 
   export type ClientBalanceSelect = {
+    id?: boolean
     client?: boolean | ClientArgs
     clientId?: boolean
     coin?: boolean | CoinArgs
@@ -6273,8 +6286,8 @@ export namespace Prisma {
      * // Get first 10 ClientBalances
      * const clientBalances = await prisma.clientBalance.findMany({ take: 10 })
      * 
-     * // Only select the `clientId`
-     * const clientBalanceWithClientIdOnly = await prisma.clientBalance.findMany({ select: { clientId: true } })
+     * // Only select the `id`
+     * const clientBalanceWithIdOnly = await prisma.clientBalance.findMany({ select: { id: true } })
      * 
     **/
     findMany<T extends ClientBalanceFindManyArgs>(
@@ -6970,6 +6983,7 @@ export namespace Prisma {
 
 
   export const ClientBalanceScalarFieldEnum: {
+    id: 'id',
     clientId: 'clientId',
     coinId: 'coinId',
     balance: 'balance',
@@ -7350,6 +7364,7 @@ export namespace Prisma {
     AND?: Enumerable<ClientBalanceWhereInput>
     OR?: Enumerable<ClientBalanceWhereInput>
     NOT?: Enumerable<ClientBalanceWhereInput>
+    id?: IntFilter | number
     client?: XOR<ClientRelationFilter, ClientWhereInput>
     clientId?: IntFilter | number
     coin?: XOR<CoinRelationFilter, CoinWhereInput>
@@ -7359,6 +7374,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceOrderByWithRelationInput = {
+    id?: SortOrder
     client?: ClientOrderByWithRelationInput
     clientId?: SortOrder
     coin?: CoinOrderByWithRelationInput
@@ -7368,10 +7384,12 @@ export namespace Prisma {
   }
 
   export type ClientBalanceWhereUniqueInput = {
+    id?: number
     clientId_coinId?: ClientBalanceClientIdCoinIdCompoundUniqueInput
   }
 
   export type ClientBalanceOrderByWithAggregationInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
@@ -7387,6 +7405,7 @@ export namespace Prisma {
     AND?: Enumerable<ClientBalanceScalarWhereWithAggregatesInput>
     OR?: Enumerable<ClientBalanceScalarWhereWithAggregatesInput>
     NOT?: Enumerable<ClientBalanceScalarWhereWithAggregatesInput>
+    id?: IntWithAggregatesFilter | number
     clientId?: IntWithAggregatesFilter | number
     coinId?: IntWithAggregatesFilter | number
     balance?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
@@ -7739,6 +7758,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedCreateInput = {
+    id?: number
     clientId: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
@@ -7753,6 +7773,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
     clientId?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -7760,6 +7781,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCreateManyInput = {
+    id?: number
     clientId: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
@@ -7772,6 +7794,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
     clientId?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
@@ -8148,6 +8171,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCountOrderByAggregateInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
@@ -8155,12 +8179,14 @@ export namespace Prisma {
   }
 
   export type ClientBalanceAvgOrderByAggregateInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
   }
 
   export type ClientBalanceMaxOrderByAggregateInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
@@ -8168,6 +8194,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceMinOrderByAggregateInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
@@ -8175,6 +8202,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceSumOrderByAggregateInput = {
+    id?: SortOrder
     clientId?: SortOrder
     coinId?: SortOrder
     balance?: SortOrder
@@ -8662,6 +8690,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedCreateWithoutClientInput = {
+    id?: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
     isActive?: boolean
@@ -8729,6 +8758,7 @@ export namespace Prisma {
     AND?: Enumerable<ClientBalanceScalarWhereInput>
     OR?: Enumerable<ClientBalanceScalarWhereInput>
     NOT?: Enumerable<ClientBalanceScalarWhereInput>
+    id?: IntFilter | number
     clientId?: IntFilter | number
     coinId?: IntFilter | number
     balance?: DecimalFilter | Decimal | DecimalJsLike | number | string
@@ -8791,6 +8821,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedCreateWithoutCoinInput = {
+    id?: number
     clientId: number
     balance: Decimal | DecimalJsLike | number | string
     isActive?: boolean
@@ -9116,6 +9147,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCreateManyClientInput = {
+    id?: number
     coinId: number
     balance: Decimal | DecimalJsLike | number | string
     isActive?: boolean
@@ -9163,12 +9195,14 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedUpdateWithoutClientInput = {
+    id?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ClientBalanceUncheckedUpdateManyWithoutClientBalanceInput = {
+    id?: IntFieldUpdateOperationsInput | number
     coinId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
@@ -9210,6 +9244,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceCreateManyCoinInput = {
+    id?: number
     clientId: number
     balance: Decimal | DecimalJsLike | number | string
     isActive?: boolean
@@ -9234,6 +9269,7 @@ export namespace Prisma {
   }
 
   export type ClientBalanceUncheckedUpdateWithoutCoinInput = {
+    id?: IntFieldUpdateOperationsInput | number
     clientId?: IntFieldUpdateOperationsInput | number
     balance?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
