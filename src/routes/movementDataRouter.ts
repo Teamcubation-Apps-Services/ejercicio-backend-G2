@@ -7,10 +7,12 @@ const movementData = Router()
  * @swagger
  * components:
  *  schemas:
- *    BenefitBody:
+ *    MovementBody:
  *      type: object
  *      properties:
  *        clientId:
+ *          type: number
+ *        movementId:
  *          type: number
  *        senderWalletAddress:
  *          type: string
@@ -22,12 +24,14 @@ const movementData = Router()
  *          type: number
  *        fee:
  *          type: number
- *    BenefitResponse:
+ *    MovementResponse:
  *      type: object
  *      properties:
  *        id:
  *          type: integer
  *        clientId:
+ *          type: number
+ *        movementId:
  *          type: number
  *        senderWalletAddress:
  *          type: string
@@ -49,7 +53,7 @@ const movementData = Router()
  */
 /**
  * @swagger
- * /movementsData:
+ * /movementdata:
  *  get:
  *    summary: List all movementsData
  *    tags: [movementsData]
@@ -60,7 +64,7 @@ const movementData = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MovementResponse'
  *  post:
  *    summary: Create a new movementData
  *    tags: [movementsData]
@@ -69,18 +73,18 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/BenefitBody'
+ *            $ref: '#/components/schemas/MovementBody'
  *    responses:
  *      201:
  *        description: Created movementData
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/BenefitResponse'
+ *              $ref: '#/components/schemas/MovementResponse'
  */
 /**
  * @swagger
- * /movementsData/{id}:
+ * /movementdata/{id}:
  *  put:
  *    summary: Update a movementData
  *    tags: [movementsData]
@@ -95,14 +99,14 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/BenefitBody'
+ *            $ref: '#/components/schemas/MovementBody'
  *    responses:
  *      200:
  *        description: Updated movementData
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MovementResponse'
  *  delete:
  *    summary: Delete a movementData
  *    tags: [movementsData]
@@ -119,15 +123,17 @@ const movementData = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MovementResponse'
  *            example:
- *                id: 4
- *                name: beneficio super
- *                discountPercentage: "30"
- *                refoundCap: "100"
- *                valideSince: 2022-11-03T00:00:00.000Z
- *                valideTo: 2023-11-03T00:00:00.000Z
- *                isActive: false
+ *              id:
+ *              clientId:
+ *              movementId:
+ *              senderWalletAddress:
+ *              receiverWalletAddress:
+ *              coinId:
+ *              amount:
+ *              fee:
+ *              isActive: false
  */
 
 movementData.route('/').get(getAllMovementDataController).post(postMovementDataController)

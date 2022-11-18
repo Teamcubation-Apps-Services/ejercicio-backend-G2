@@ -113,12 +113,11 @@ const coins = Router()
  *            schema:
  *                $ref: '#/components/schemas/CoinResponse'
  *            example:
- *                id: 4
- *                name: beneficio super
- *                discountPercentage: "30"
- *                refoundCap: "100"
- *                valideSince: 2022-11-03T00:00:00.000Z
- *                valideTo: 2023-11-03T00:00:00.000Z
+ *                id: 1
+ *                name: "ETH"
+ *                description: "ether"
+ *                quotationReference: 20
+ *                annualPerformance: 10
  *                isActive: false
  */
 
