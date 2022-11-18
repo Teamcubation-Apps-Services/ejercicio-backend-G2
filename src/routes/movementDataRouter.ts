@@ -125,7 +125,6 @@ const movementData = Router()
  *            schema:
  *                $ref: '#/components/schemas/MovementResponse'
  *            example:
- *              id:
  *              clientId:
  *              movementId:
  *              senderWalletAddress:
@@ -133,7 +132,6 @@ const movementData = Router()
  *              coinId:
  *              amount:
  *              fee:
- *              isActive: false
  */
 
 movementData.route('/').get(getAllMovementDataController).post(postMovementDataController)

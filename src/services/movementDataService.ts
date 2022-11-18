@@ -42,6 +42,6 @@ export const deleteMovementData = async (req: Request, res: Response): Promise<v
     if (movementData instanceof Error) {
         res.status(400).json({ message: movementData.message })
     } else {
-        res.status(204)
+        res.status(200).json(movementData)
     }
 }
