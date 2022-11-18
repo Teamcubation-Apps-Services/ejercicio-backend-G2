@@ -7,7 +7,7 @@ const movementData = Router()
  * @swagger
  * components:
  *  schemas:
- *    MovementBody:
+ *    MovementDataBody:
  *      type: object
  *      properties:
  *        clientId:
@@ -24,7 +24,7 @@ const movementData = Router()
  *          type: number
  *        fee:
  *          type: number
- *    MovementResponse:
+ *    MovementDataResponse:
  *      type: object
  *      properties:
  *        id:
@@ -64,7 +64,7 @@ const movementData = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/MovementResponse'
+ *                $ref: '#/components/schemas/MovementDataResponse'
  *  post:
  *    summary: Create a new movementData
  *    tags: [movementsData]
@@ -73,14 +73,14 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/MovementBody'
+ *            $ref: '#/components/schemas/MovementDataBody'
  *    responses:
  *      201:
  *        description: Created movementData
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/MovementResponse'
+ *              $ref: '#/components/schemas/MovementDataResponse'
  */
 /**
  * @swagger
@@ -99,14 +99,14 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/MovementBody'
+ *            $ref: '#/components/schemas/MovementDataBody'
  *    responses:
  *      200:
  *        description: Updated movementData
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/MovementResponse'
+ *                $ref: '#/components/schemas/MovementDataResponse'
  *  delete:
  *    summary: Delete a movementData
  *    tags: [movementsData]
@@ -123,7 +123,7 @@ const movementData = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/MovementResponse'
+ *                $ref: '#/components/schemas/MovementDataResponse'
  *            example:
  *              clientId:
  *              movementId:
