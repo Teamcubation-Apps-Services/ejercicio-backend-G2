@@ -85,7 +85,7 @@ export const deleteMovementDataRepository = async (req: Request, res: Response) 
           }
         })
       } else {
-        return new Error('Movment data already deleted')
+        return new Error('Movement data already deleted')
       }
     } else {
       return new Error('Record not found')
