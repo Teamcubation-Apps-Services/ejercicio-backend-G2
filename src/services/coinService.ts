@@ -42,6 +42,6 @@ export const deleteCoin = async (req: Request, res: Response): Promise<void> => 
     if (coin instanceof Error) {
         res.status(400).json({ message: coin.message })
     } else {
-        res.status(204)
+        res.status(200).json(coin)
     }
 }
