@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getAllClientRepository, createClientRepository, updateClientRepository, deleteClientRepository } from '../repository/clientsRepository'
+import { getAllClientRepository, getClientRepository, createClientRepository, updateClientRepository, deleteClientRepository } from '../repository/clientsRepository'
 
 export const getAllClients = async (req: Request, res: Response): Promise<void> => {
   const clients = await getAllClientRepository(req, res)
@@ -7,6 +7,15 @@ export const getAllClients = async (req: Request, res: Response): Promise<void> 
     res.status(400).json({ message: clients.message })
   } else {
     res.status(200).json(clients)
+  }
+}
+
+export const getClient = async (req: Request, res: Response): Promise<void> => {
+  const client = await getClientRepository(req, res)
+  if (client instanceof Error) {
+    res.status(400).json({ message: client.message })
+  } else {
+    res.status(200).json(client)
   }
 }
 

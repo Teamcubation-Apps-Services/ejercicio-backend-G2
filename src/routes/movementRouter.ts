@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllMovementsController, createMovementController, updateMovementController, deleteMovementController } from '../controllers/movementController'
+import { getAllMovementsController, getMovementController, createMovementController, updateMovementController, deleteMovementController } from '../controllers/movementController'
 
 const movements = Router()
 
@@ -107,6 +107,7 @@ const movements = Router()
  */
 
 movements.route('/').get(getAllMovementsController)
+movements.route('/:id').get(getMovementController)
 movements.route('/').post(createMovementController)
 movements.route('/:id').put(updateMovementController)
 movements.route('/:id').delete(deleteMovementController)
