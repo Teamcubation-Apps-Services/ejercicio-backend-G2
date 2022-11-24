@@ -15,12 +15,12 @@ export const getAllMovementsRepository = async (req: Request, res: Response): Pr
   }
 }
 
-export const getMovementRepository = async (req: Request, res: Response) : Promise<Movement[] | Error> => {
-  try{
+export const getMovementRepository = async (req: Request, res: Response): Promise<Movement[] | Error> => {
+  try {
     const id = Number(req.params.id)
-  
-    return await prisma.movement.findMany({where: {id}})
-  }catch(e: any){
+
+    return await prisma.movement.findMany({ where: { id } })
+  } catch (e: any) {
     return new Error(e.meta.cause)
   }
 }

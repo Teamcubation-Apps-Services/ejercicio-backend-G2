@@ -11,9 +11,9 @@ export const getAllMovements = async (req: Request, res: Response): Promise<void
 export const getMovement = async (req: Request, res: Response): Promise<void> => {
   const movement = await getMovementRepository(req, res)
   if (movement instanceof Error) {
-      res.status(400).json({ message: movement.message })
+    res.status(400).json({ message: movement.message })
   } else {
-      res.status(200).json(movement)
+    res.status(200).json(movement)
   }
 }
 
