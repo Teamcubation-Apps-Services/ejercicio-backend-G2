@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { getAllMovements, createMovement, updateMovement, deleteMovement } from '../services/movementService'
+import { getAllMovements, getMovement, createMovement, updateMovement, deleteMovement } from '../services/movementService'
 
 export const getAllMovementsController = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -9,6 +9,16 @@ export const getAllMovementsController = async (_: Request, res: Response, next:
     console.log(`Error: ${e}`)
   }
 }
+
+export const getMovementController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    await getMovement(req, res)
+    next()
+  } catch (e) {
+    console.log(`Error: ${e}`)
+  }
+}
+
 export const createMovementController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { id, type } = req.body
