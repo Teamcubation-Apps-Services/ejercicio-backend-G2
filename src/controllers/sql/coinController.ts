@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { deleteCoin, getAllCoin, getCoin, postCoin, updateCoin} from '../services/coinService'
+import { deleteCoin, getAllCoin, getCoin, postCoin, updateCoin} from '../../services/sql/coinService'
 
 export const getAllCoinsController = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

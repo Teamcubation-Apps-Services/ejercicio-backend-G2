@@ -10,7 +10,7 @@ const testCoin = {
 
 // Se fija que el get devuelva aunque sea un documento
 it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/coins')
+    const response = await supertest(app).get('/sql/coins')
     
     expect(response.body.length).toBeGreaterThan(0)
     expect(response.statusCode).toBe(200)
@@ -18,7 +18,7 @@ it('Should return an array with at least 1 record, and status code 200', async()
 
 // Debe retornar toda la data especifica del documento con id 3
 it('Should return the correct document', async () => {
-    const response = await supertest(app).get('/coins/3')
+    const response = await supertest(app).get('/sql/coins/3')
     
     expect(response.body[0].name).toBe("MATIC")
     expect(response.body[0].description).toBe("mumbai")
@@ -29,7 +29,7 @@ it('Should return the correct document', async () => {
 
 // Debe crear correctamente un documento
 it('Should create a coin', async() => {
-    const response = await supertest(app).post('/coins').send(testCoin)
+    const response = await supertest(app).post('/sql/coins').send(testCoin)
     expect(response.statusCode).toBe(201)
     expect(response.body.name).toBe(testCoin.name)
     expect(response.body.description).toBe(testCoin.description)
@@ -40,7 +40,7 @@ it('Should create a coin', async() => {
 
 // No debe crear ningun documento, ya que no le pasamos un "name" que es un campo requerido
 it('Should not create a coin if not name is given', async() => {
-    const response = await supertest(app).post('/coins').send({description: 'rsk', quotationReference: '102', annualPerformance: '13',})
+    const response = await supertest(app).post('/sql/coins').send({description: 'rsk', quotationReference: '102', annualPerformance: '13',})
 
     expect(response.statusCode).toBe(400)
 })
@@ -48,7 +48,7 @@ it('Should not create a coin if not name is given', async() => {
 // Debe hacer un update a un documento de forma apropiada
 // Lo mejor seria pasarle al .put() un id de un documento que no se le haya hecho un update
 it('Should update a record', async () => {
-    const response = await supertest(app).put('/coins/10').send({description: "RSK", annualPerformance: "10",  quotationReference: "100"})
+    const response = await supertest(app).put('/sql/coins/10').send({description: "RSK", annualPerformance: "10",  quotationReference: "100"})
 
     expect(response.statusCode).toBe(200)
     expect(response.body.name).toBe("RBTC")
@@ -61,7 +61,7 @@ it('Should update a record', async () => {
 // En el .delete() pasarle el id de un documento que no se haya borrado
 // de lo contratio nos retornara un mensaje de error diciendo que el documento ya esta borrado
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete('/coins/11')
+    const response = await supertest(app).delete('/sql/coins/11')
     
     expect(response.statusCode).toBe(200)
     expect(response.body.isActive).toBe(false)

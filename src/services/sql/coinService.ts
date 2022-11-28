@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { deleteCoinRepository, getAllCoinRepository, getCoinRepository, postCoinRepository, updateCoinRepository } from '../repository/coinRepository'
+import { deleteCoinRepository, getAllCoinRepository, getCoinRepository, postCoinRepository, updateCoinRepository } from '../../repository/sql/coinRepository'
 
 export const getAllCoin = async (req: Request, res: Response): Promise<void> => {
   const coins = await getAllCoinRepository(req, res)

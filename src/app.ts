@@ -12,12 +12,12 @@ import { options } from './swaggerOptions'
 const app = express()
 
 app.use(express.json())
-app.use('/benefits', benefitRouter)
-app.use('/coins', coinRouter)
-app.use('/movements', movementRouter)
-app.use('/clients', clientRouter)
-app.use('/balances', clientBalanceRouter)
-app.use('/movementdata', movementDataRouter)
+app.use('/sql/benefits', benefitRouter)
+app.use('/sql/coins', coinRouter)
+app.use('/sql/movements', movementRouter)
+app.use('/sql/clients', clientRouter)
+app.use('/sql/balances', clientBalanceRouter)
+app.use('/sql/movementdata', movementDataRouter)
 
 const specs = swaggerJSDoc(options)
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs))

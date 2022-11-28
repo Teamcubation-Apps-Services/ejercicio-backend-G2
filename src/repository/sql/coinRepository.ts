@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { PrismaClient as SqlClient, Coin } from '../../prisma/generated/sql-client'
+import { PrismaClient as SqlClient, Coin } from '../../../prisma/generated/sql-client'
 
 const prisma = new SqlClient()
 

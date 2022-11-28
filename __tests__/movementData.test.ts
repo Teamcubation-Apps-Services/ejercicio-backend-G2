@@ -14,7 +14,7 @@ const testMovementData = {
 }
 
 it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/movementdata')
+    const response = await supertest(app).get('/sql/movementdata')
     
     expect(response.body.length).toBeGreaterThan(0)
     expect(response.statusCode).toBe(200)
@@ -22,7 +22,7 @@ it('Should return an array with at least 1 record, and status code 200', async()
 
 
 it('Should return the correct document', async () => {
-    const response = await supertest(app).get('/movementdata/6')
+    const response = await supertest(app).get('/sql/movementdata/6')
     
     expect(response.body[0].clientId).toBe(2)
     expect(response.body[0].movementId).toBe(2)
@@ -36,7 +36,7 @@ it('Should return the correct document', async () => {
 
 
 it('Should create a coin', async() => {
-    const response = await supertest(app).post('/movementdata').send({...testMovementData})
+    const response = await supertest(app).post('/sql/movementdata').send({...testMovementData})
     
     // Guardo el id del nuevo documento para despues poder hacer un .put y un .delete con el mismo sin afectar a otra data de la db
     idResponse = response.body.id;
@@ -55,14 +55,14 @@ it('Should create a coin', async() => {
 
 
 it('Should not create a coin if not name is given', async() => {
-    const response = await supertest(app).post('/movementdata').send({senderWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", receiverWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", coinId: 3,})
+    const response = await supertest(app).post('/sql/movementdata').send({senderWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", receiverWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", coinId: 3,})
 
     expect(response.statusCode).toBe(400)
 })
 
 
 it('Should update a record', async () => {
-    const response = await supertest(app).put(`/movementdata/${idResponse}`).send({senderWalletAddress: "0x651C602e329A6cd0236337JUANCd5742605B7fA8", coinId: 5})
+    const response = await supertest(app).put(`/sql/movementdata/${idResponse}`).send({senderWalletAddress: "0x651C602e329A6cd0236337JUANCd5742605B7fA8", coinId: 5})
 
     expect(response.statusCode).toBe(200)
     expect(response.body.senderWalletAddress).toBe("0x651C602e329A6cd0236337JUANCd5742605B7fA8")
@@ -73,7 +73,7 @@ it('Should update a record', async () => {
 
 
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete(`/movementdata/${idResponse}`)
+    const response = await supertest(app).delete(`/sql/movementdata/${idResponse}`)
     
     expect(response.statusCode).toBe(200)
     expect(response.body.isActive).toBe(false)
