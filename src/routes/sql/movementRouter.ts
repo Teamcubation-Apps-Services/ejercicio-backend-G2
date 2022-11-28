@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllMovementsController, getMovementController, createMovementController, updateMovementController, deleteMovementController } from '../controllers/movementController'
+import { getAllMovementsController, getMovementController, createMovementController, updateMovementController, deleteMovementController } from '../../controllers/sql/movementController'
 
 const movements = Router()
 

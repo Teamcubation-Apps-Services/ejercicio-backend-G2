@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getAllClientRepository, getClientRepository, createClientRepository, updateClientRepository, deleteClientRepository } from '../repository/clientsRepository'
+import { getAllClientRepository, getClientRepository, createClientRepository, updateClientRepository, deleteClientRepository } from '../../repository/sql/clientsRepository'
 
 export const getAllClients = async (req: Request, res: Response): Promise<void> => {
   const clients = await getAllClientRepository(req, res)
