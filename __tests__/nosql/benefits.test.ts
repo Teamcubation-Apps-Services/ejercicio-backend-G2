@@ -23,38 +23,38 @@ const updateBenefit = {
 }
 
 it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/sql/benefits')
+    const response = await supertest(app).get('/nosql/benefits')
     
     expect(response.body.length).toBeGreaterThan(0)
     expect(response.statusCode).toBe(200)
 })
 
 it('Should create a benefit', async() => {
-    const response = await supertest(app).post('/sql/benefits').send(testBenefit)
+    const response = await supertest(app).post('/nosql/benefits').send(testBenefit)
     idResponse = response.body.id
     expect(response.statusCode).toBe(201)
     expect(response.body.name).toBe(testBenefit.name)
-    expect(response.body.discountPercentage).toBe(testBenefit.discountPercentage.toString())
-    expect(response.body.refoundCap).toBe(testBenefit.refoundCap.toString())
+    expect(response.body.discountPercentage).toBe(testBenefit.discountPercentage)
+    expect(response.body.refoundCap).toBe(testBenefit.refoundCap)
     expect(response.body.valideSince).toBe(testBenefit.valideSince.toISOString())
     expect(response.body.valideTo).toBe(testBenefit.valideTo.toISOString())
     expect(response.body.isActive).toBe(true)
 })
 
 it('Should not create a benefit if not name is given', async() => {
-    const response = await supertest(app).post('/sql/benefits').send(incompleteBenefit)
+    const response = await supertest(app).post('/nosql/benefits').send(incompleteBenefit)
 
     expect(response.statusCode).toBe(400)
 })
 
 it('Should update a record', async () => {
-    const response = await supertest(app).put(`/sql/benefits/${idResponse}`).send(updateBenefit)
+    const response = await supertest(app).put(`/nosql/benefits/${idResponse}`).send(updateBenefit)
     expect(response.statusCode).toBe(200)
     expect(response.body.name).toBe(updateBenefit.name)
 })
 
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete(`/sql/benefits/${idResponse}`)
+    const response = await supertest(app).delete(`/nosql/benefits/${idResponse}`)
     
     expect(response.statusCode).toBe(200)
     expect(response.body.isActive).toBe(false)
