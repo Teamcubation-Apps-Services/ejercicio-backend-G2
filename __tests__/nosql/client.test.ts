@@ -4,11 +4,11 @@ import supertest from 'supertest'
 let idResponse: string;
 
 let testClient = { 
-  dni: "31164331", 
+  dni: "31164a331", 
   firstName: 'Matias', 
   lastName: 'Kosoy', 
-  email: 'holaprobando@gmail.com', 
-  phoneNumber: 12341234 
+  email: 'holaprob2ando@gmail.com', 
+  phoneNumber: 123412434 
 }
 
 it('Should return an array with at least 1 record, and status code 200', async () => {

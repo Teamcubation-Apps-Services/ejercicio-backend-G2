@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { getAllClientRepository, getClientRepository, createClientRepository, updateClientRepository, deleteClientRepository } from '../../repository/sql/clientsRepository'
+import { getAllClientRepository, getClientRepository, createClientRepository, updateClientRepository, deleteClientRepository, deleteDefClientRepository } from '../../repository/sql/clientsRepository'
 
 export const getAllClients = async (req: Request, res: Response): Promise<void> => {
   const clients = await getAllClientRepository(req, res)
@@ -39,6 +39,15 @@ export const updateClient = async (req: Request, res: Response): Promise<void> =
 
 export const deleteClient = async (req: Request, res: Response): Promise<void> => {
   const deleted = await deleteClientRepository(req, res)
+  if (deleted instanceof Error) {
+    res.status(400).json({ message: deleted.message })
+  } else {
+    res.status(200).json(deleted)
+  }
+}
+
+export const deleteDefClient = async (req: Request, res: Response): Promise<void> => {
+  const deleted = await deleteDefClientRepository(req, res)
   if (deleted instanceof Error) {
     res.status(400).json({ message: deleted.message })
   } else {

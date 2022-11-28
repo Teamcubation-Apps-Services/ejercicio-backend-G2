@@ -95,3 +95,17 @@ export const deleteClientRepository = async (req: Request, res: Response): Promi
     return new Error(e.meta.cause)
   }
 }
+
+export const deleteDefClientRepository = async (req: Request, res: Response): Promise<Client | Error> => {
+  try {
+    const { id } = req.params
+    return await prisma.client.delete({
+      where: {
+        id: Number(id)
+      }
+    })
+      
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
+}

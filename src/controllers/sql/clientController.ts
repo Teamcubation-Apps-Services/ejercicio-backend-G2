@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { getAllClients, getClient, createClient, updateClient, deleteClient } from '../../services/sql/clientService'
+import { getAllClients, getClient, createClient, updateClient, deleteClient, deleteDefClient } from '../../services/sql/clientService'
 
 export const getAllClientsController = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
@@ -42,6 +42,15 @@ export const updateClientController = async (req: Request, res: Response, next: 
 export const deleteClientController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     await deleteClient(req, res)
+    next()
+  } catch (e) {
+    console.log(`Error: ${e}`)
+  }
+}
+
+export const deleteDefClientController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    await deleteDefClient(req, res)
     next()
   } catch (e) {
     console.log(`Error: ${e}`)
