@@ -9,7 +9,7 @@ it('Should return an array with at least 1 record, and status code 200', async (
 })
 
 it('Should create a client', async () => {
-  const response = await supertest(app).post('/sql/clients').send({ dni: 31164331, firstName: 'Matias', lastName: 'Kosoy', email: 'holaprobando@gmail.com', phoneNumber: 12341234 })
+  const response = await supertest(app).post('/clients').send({ dni: 31164331, firstName: 'Matias', lastName: 'Kosoy', email: 'holaprobando@gmail.com', phoneNumber: 12341234 })
   expect(response.statusCode).toBe(201)
   expect(response.body.dni).toBe(31164331)
   expect(response.body.firstName).toBe('Matias')
@@ -20,13 +20,13 @@ it('Should create a client', async () => {
 })
 
 it('Should update a record', async () => {
-  const response = await supertest(app).put('/sql/clients/1').send({ email: 'holacambiemimail@gmail.com' })
+  const response = await supertest(app).put('/clients/1').send({ email: 'holacambiemimail@gmail.com' })
   expect(response.statusCode).toBe(200)
   expect(response.body.email).toBe('holacambiemimail@gmail.com')
 })
 
 it.skip('Should delete a record', async () => {
-  const response = await supertest(app).delete('/sql/clients/1')
+  const response = await supertest(app).delete('/clients/1')
 
   expect(response.statusCode).toBe(200)
   expect(response.body.isActive).toBe(false)
