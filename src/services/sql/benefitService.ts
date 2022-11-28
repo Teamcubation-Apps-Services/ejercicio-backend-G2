@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { createBenefitRepository, deleteBenefitRepository, getAllBenefitsRepository, updateBenefitRepository } from '../repository/benefitRepository'
+import { createBenefitRepository, deleteBenefitRepository, getAllBenefitsRepository, updateBenefitRepository } from '../../repository/sql/benefitRepository'
 
 export const getAllBenefits = async (req: Request, res: Response): Promise<void> => {
   const benefits = await getAllBenefitsRepository(req, res)

@@ -21,8 +21,8 @@ export const getClientController = async (req: Request, res: Response, next: Nex
 
 export const createClientController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { id, dni, firstName, lastName, email, phoneNumber } = req.body
-    if (id && dni && firstName && lastName && email && phoneNumber) await createClient(req, res)
+    const { dni, firstName, lastName, email, phoneNumber } = req.body
+    if ( dni && firstName && lastName && email && phoneNumber) await createClient(req, res)
     else res.status(400).send('Missing value')
     next()
   } catch (e) {

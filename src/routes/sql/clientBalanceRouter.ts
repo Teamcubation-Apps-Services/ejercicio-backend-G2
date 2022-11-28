@@ -1,6 +1,6 @@
 import { RequestHandler, Router } from 'express'
-import { deleteClientBalanceController, getAllClientBalancesController, getClientBalanceController, updateClientBalanceController } from '../controllers/clientBalanceController'
-import { createClientBalance } from '../services/clientBalanceService'
+import { deleteClientBalanceController, getAllClientBalancesController, getClientBalanceController, updateClientBalanceController } from '../../controllers/sql/clientBalanceController'
+import { createClientBalance } from '../../services/sql/clientBalanceService'
 
 const clientBalance = Router()
 

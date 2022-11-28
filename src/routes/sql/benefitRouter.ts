@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { createBenefitController, deleteBenefitController, getAllBenefitsController, updateBenefitController } from '../controllers/benefitController'
+import { createBenefitController, deleteBenefitController, getAllBenefitsController, updateBenefitController } from '../../controllers/sql/benefitController'
 
 const benefits = Router()
 

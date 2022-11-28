@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { createBenefit, deleteBenefit, getAllBenefits, updateBenefit } from '../services/benefitService'
+import { createBenefit, deleteBenefit, getAllBenefits, updateBenefit } from '../../services/sql/benefitService'
 
 export const getAllBenefitsController = async (_: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

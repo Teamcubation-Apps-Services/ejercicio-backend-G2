@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import { createClientBalanceRepository, deleteClientBalanceRepository, getAllClientBalancesRepository, getClientBalanceRepository, updateClientBalanceRepository } from '../repository/clientBalanceRepository'
+import { createClientBalanceRepository, deleteClientBalanceRepository, getAllClientBalancesRepository, getClientBalanceRepository, updateClientBalanceRepository } from '../../repository/sql/clientBalanceRepository'
 
 export const getAllClientBalances = async (req: Request, res: Response): Promise<void> => {
   const balances = await getAllClientBalancesRepository(req, res)

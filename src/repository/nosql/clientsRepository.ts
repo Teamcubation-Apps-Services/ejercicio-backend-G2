@@ -17,7 +17,7 @@ export const getAllClientRepository = async (req: Request, res: Response): Promi
 
 export const getClientRepository = async (req: Request, res: Response): Promise<Client[] | Error> => {
   try {
-    const id = Number(req.params.id)
+    const id = req.params.id
 
     return await prisma.client.findMany({ where: { id } })
   } catch (e: any) {
@@ -26,11 +26,10 @@ export const getClientRepository = async (req: Request, res: Response): Promise<
 }
 
 export const createClientRepository = async (req: Request, res: Response): Promise<Client | Error> => {
-  const { id, dni, firstName, lastName, email, phoneNumber } = req.body
+  const { dni, firstName, lastName, email, phoneNumber } = req.body
   try {
     return await prisma.client.create({
       data: {
-        id,
         dni,
         firstName,
         lastName,
@@ -49,13 +48,13 @@ export const updateClientRepository = async (req: Request, res: Response): Promi
     const { id } = req.params
     const client = await prisma.client.findUnique({
       where: {
-        id: Number(id)
+        id
       }
     })
     if (client !== null && client.isActive) {
       return await prisma.client.update({
         where: {
-          id: Number(id)
+          id
         },
         data
       })
@@ -72,14 +71,14 @@ export const deleteClientRepository = async (req: Request, res: Response): Promi
     const { id } = req.params
     const client = await prisma.client.findUnique({
       where: {
-        id: String(id)
+        id
       }
     })
     if (client !== null) {
       if (client.isActive) {
         return await prisma.client.update({
           where: {
-            id: String(id)
+            id
           },
           data: {
             isActive: false

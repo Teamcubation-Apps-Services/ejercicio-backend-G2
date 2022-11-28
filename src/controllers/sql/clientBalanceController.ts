@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { getAllClientBalances, getClientBalance, createClientBalance, updateClientBalance, deleteClientBalance } from '../services/clientBalanceService'
+import { getAllClientBalances, getClientBalance, createClientBalance, updateClientBalance, deleteClientBalance } from '../../services/sql/clientBalanceService'
 
 export const getAllClientBalancesController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {

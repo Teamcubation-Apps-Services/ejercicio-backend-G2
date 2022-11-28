@@ -21,8 +21,8 @@ export const getMovementController = async (req: Request, res: Response, next: N
 
 export const createMovementController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { id, type } = req.body
-    if (id && type) await createMovement(req, res)
+    const { type } = req.body
+    if (type) await createMovement(req, res)
     else res.status(400).send('Missing value')
     next()
   } catch (e) {

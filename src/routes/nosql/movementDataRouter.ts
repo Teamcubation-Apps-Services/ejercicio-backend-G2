@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllMovementDataController, getMovementDataController, postMovementDataController, updateMovementDataController, deleteMovementDataController } from '../../controllers/sql/movementDataController'
+import { getAllMovementDataController, getMovementDataController, postMovementDataController, updateMovementDataController, deleteMovementDataController } from '../../controllers/nosql/movementDataController'
 
 const movementData = Router()
 
