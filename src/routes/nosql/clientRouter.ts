@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { getAllClientsController, getClientController, createClientController, updateClientController, deleteClientController } from '../../controllers/nosql/clientController'
+import { getAllClientsController, getClientController, createClientController, updateClientController, deleteClientController, deleteDefClientController } from '../../controllers/nosql/clientController'
 
 const clients = Router()
 
@@ -131,5 +131,6 @@ clients.route('/:id').get(getClientController)
 clients.route('/').post(createClientController)
 clients.route('/:id').put(updateClientController)
 clients.route('/:id').delete(deleteClientController)
+clients.route('/delete/:id').delete(deleteDefClientController)
 
 export default clients
