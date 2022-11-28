@@ -1,4 +1,4 @@
-import app from '../src/app'
+import app from '../../src/app'
 import supertest from 'supertest'
 
 it('Should return an array with at least 1 record, and status code 200', async () => {
