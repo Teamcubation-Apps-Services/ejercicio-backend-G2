@@ -1,23 +1,33 @@
 import express from 'express'
-import benefitRouter from './routes/sql/benefitRouter'
-import coinRouter from './routes/sql/coinRouter'
-import movementRouter from './routes/sql/movementRouter'
-import clientRouter from './routes/sql/clientRouter'
-import clientBalanceRouter from './routes/sql/clientBalanceRouter'
-import movementDataRouter from './routes/sql/movementDataRouter'
 import swaggerUI from 'swagger-ui-express'
 import swaggerJSDoc from 'swagger-jsdoc'
 import { options } from './swaggerOptions'
 
+// sql routes
+import sqlBenefitRouter from './routes/sql/benefitRouter'
+import sqlCoinRouter from './routes/sql/coinRouter'
+import sqlMovementRouter from './routes/sql/movementRouter'
+import sqlClientRouter from './routes/sql/clientRouter'
+import sqlClientBalanceRouter from './routes/sql/clientBalanceRouter'
+import sqlMovementDataRouter from './routes/sql/movementDataRouter'
+
+// no-sql routes
+/*
+import nosqlBenefitRouter from './routes/nosql/benefitRouter'
+import nosqlCoinRouter from './routes/nosql/coinRouter'
+import nosqlClientRouter from './routes/nosql/clientRouter'
+import nosqlMovementDataRouter from './routes/nosql/movementDataRouter'
+*/
+
 const app = express()
 
 app.use(express.json())
-app.use('/sql/benefits', benefitRouter)
-app.use('/sql/coins', coinRouter)
-app.use('/sql/movements', movementRouter)
-app.use('/sql/clients', clientRouter)
-app.use('/sql/balances', clientBalanceRouter)
-app.use('/sql/movementdata', movementDataRouter)
+app.use('/sql/benefits', sqlBenefitRouter)
+app.use('/sql/coins', sqlCoinRouter)
+app.use('/sql/movements', sqlMovementRouter)
+app.use('/sql/clients', sqlClientRouter)
+app.use('/sql/balances', sqlClientBalanceRouter)
+app.use('/sql/movementdata', sqlMovementDataRouter)
 
 const specs = swaggerJSDoc(options)
 app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs))
