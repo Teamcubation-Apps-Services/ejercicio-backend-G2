@@ -15,6 +15,16 @@ export const getAllClientRepository = async (req: Request, res: Response): Promi
   }
 }
 
+export const getClientRepository = async (req: Request, res: Response): Promise<Client[] | Error> => {
+  try {
+    const id = Number(req.params.id)
+
+    return await prisma.client.findMany({ where: { id } })
+  } catch (e: any) {
+    return new Error(e.meta.cause)
+  }
+}
+
 export const createClientRepository = async (req: Request, res: Response): Promise<Client | Error> => {
   const { id, dni, firstName, lastName, email, phoneNumber } = req.body
   try {
