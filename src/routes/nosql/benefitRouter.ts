@@ -7,7 +7,7 @@ const benefits = Router()
  * @swagger
  * components:
  *  schemas:
- *    BenefitBody:
+ *    MongoBenefitBody:
  *      type: object
  *      properties:
  *        name:
@@ -22,7 +22,7 @@ const benefits = Router()
  *        valideTo:
  *          type: string
  *          format: date-time
- *    BenefitResponse:
+ *    MongoBenefitResponse:
  *      type: object
  *      properties:
  *        id:
@@ -49,7 +49,7 @@ const benefits = Router()
  */
 /**
  * @swagger
- * /benefits:
+ * /nosql/benefits:
  *  get:
  *    summary: List all benefits
  *    tags: [benefits]
@@ -60,7 +60,7 @@ const benefits = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MongoBenefitResponse'
  *  post:
  *    summary: Create a new benefit
  *    tags: [benefits]
@@ -69,18 +69,18 @@ const benefits = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/BenefitBody'
+ *            $ref: '#/components/schemas/MongoBenefitBody'
  *    responses:
  *      201:
  *        description: Created benefit
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/BenefitResponse'
+ *              $ref: '#/components/schemas/MongoBenefitResponse'
  */
 /**
  * @swagger
- * /benefits/{id}:
+ * /nosql/benefits/{id}:
  *  put:
  *    summary: Update a benefit
  *    tags: [benefits]
@@ -95,14 +95,14 @@ const benefits = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/BenefitBody'
+ *            $ref: '#/components/schemas/MongoBenefitBody'
  *    responses:
  *      200:
  *        description: Updated benefit
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MongoBenefitResponse'
  *  delete:
  *    summary: Delete a benefit
  *    tags: [benefits]
@@ -119,7 +119,7 @@ const benefits = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/BenefitResponse'
+ *                $ref: '#/components/schemas/MongoBenefitResponse'
  *            example:
  *                id: "4"
  *                name: beneficio super

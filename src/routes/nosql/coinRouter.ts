@@ -7,7 +7,7 @@ const coins = Router()
  * @swagger
  * components:
  *  schemas:
- *    CoinBody:
+ *    MongoCoinBody:
  *      type: object
  *      properties:
  *        name:
@@ -18,11 +18,11 @@ const coins = Router()
  *          type: number
  *        annualPerformance:
  *          type: number
- *    CoinResponse:
+ *    MongoCoinResponse:
  *      type: object
  *      properties:
  *        id:
- *          type: integer
+ *          type: string
  *        name:
  *          type: string
  *        description:
@@ -41,7 +41,7 @@ const coins = Router()
  */
 /**
  * @swagger
- * /coins:
+ * /nosql/coins:
  *  get:
  *    summary: List all coins
  *    tags: [coins]
@@ -52,7 +52,7 @@ const coins = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/CoinResponse'
+ *                $ref: '#/components/schemas/MongoCoinResponse'
  *  post:
  *    summary: Create a new coin
  *    tags: [coins]
@@ -61,18 +61,18 @@ const coins = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/CoinBody'
+ *            $ref: '#/components/schemas/MongoCoinBody'
  *    responses:
  *      201:
  *        description: Created coin
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/CoinResponse'
+ *              $ref: '#/components/schemas/MongoCoinResponse'
  */
 /**
  * @swagger
- * /coins/{id}:
+ * /nosql/coins/{id}:
  *  put:
  *    summary: Update a coin
  *    tags: [coins]
@@ -87,14 +87,14 @@ const coins = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/CoinBody'
+ *            $ref: '#/components/schemas/MongoCoinBody'
  *    responses:
  *      200:
  *        description: Updated coin
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/CoinResponse'
+ *                $ref: '#/components/schemas/MongoCoinResponse'
  *  delete:
  *    summary: Delete a coin
  *    tags: [coins]
@@ -111,9 +111,9 @@ const coins = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/CoinResponse'
+ *                $ref: '#/components/schemas/MongoCoinResponse'
  *            example:
- *                id: 1
+ *                id: "1"
  *                name: "ETH"
  *                description: "ether"
  *                quotationReference: 20

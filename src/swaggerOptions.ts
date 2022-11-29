@@ -11,5 +11,5 @@ export const options = {
       }
     ]
   },
-  apis: ['./src/routes/*.ts']
+  apis: ['./src/routes/sql/*.ts', './src/routes/nosql/*.ts']
 }

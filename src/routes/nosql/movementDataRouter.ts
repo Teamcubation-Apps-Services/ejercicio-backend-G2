@@ -7,7 +7,7 @@ const movementData = Router()
  * @swagger
  * components:
  *  schemas:
- *    MovementDataBody:
+ *    MongoMovementDataBody:
  *      type: object
  *      properties:
  *        clientId:
@@ -24,7 +24,7 @@ const movementData = Router()
  *          type: number
  *        fee:
  *          type: number
- *    MovementDataResponse:
+ *    MongoMovementDataResponse:
  *      type: object
  *      properties:
  *        id:
@@ -53,7 +53,7 @@ const movementData = Router()
  */
 /**
  * @swagger
- * /movementdata:
+ * /nosql/movementdata:
  *  get:
  *    summary: List all movementsData
  *    tags: [movementsData]
@@ -64,7 +64,7 @@ const movementData = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/MovementDataResponse'
+ *                $ref: '#/components/schemas/MongoMovementDataResponse'
  *  post:
  *    summary: Create a new movementData
  *    tags: [movementsData]
@@ -73,18 +73,18 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/MovementDataBody'
+ *            $ref: '#/components/schemas/MongoMovementDataBody'
  *    responses:
  *      201:
  *        description: Created movementData
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/MovementDataResponse'
+ *              $ref: '#/components/schemas/MongoMovementDataResponse'
  */
 /**
  * @swagger
- * /movementdata/{id}:
+ * /nosql/movementdata/{id}:
  *  put:
  *    summary: Update a movementData
  *    tags: [movementsData]
@@ -99,14 +99,14 @@ const movementData = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/MovementDataBody'
+ *            $ref: '#/components/schemas/MongoMovementDataBody'
  *    responses:
  *      200:
  *        description: Updated movementData
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/MovementDataResponse'
+ *                $ref: '#/components/schemas/MongoMovementDataResponse'
  *  delete:
  *    summary: Delete a movementData
  *    tags: [movementsData]
@@ -123,7 +123,7 @@ const movementData = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/MovementDataResponse'
+ *                $ref: '#/components/schemas/MongoMovementDataResponse'
  *            example:
  *              clientId:
  *              movementId:

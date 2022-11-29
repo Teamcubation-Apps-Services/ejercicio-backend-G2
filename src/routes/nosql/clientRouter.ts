@@ -7,7 +7,7 @@ const clients = Router()
  * @swagger
  * components:
  *  schemas:
- *    ClientBody:
+ *    MongoClientBody:
  *      type: object
  *      properties:
  *        dni:
@@ -20,7 +20,7 @@ const clients = Router()
  *          type: string
  *        phoneNumber:
  *          type: number
- *    ClientResponse:
+ *    MongoClientResponse:
  *      type: object
  *      properties:
  *        id:
@@ -45,7 +45,7 @@ const clients = Router()
  */
 /**
  * @swagger
- * /clients:
+ * /nosql/clients:
  *  get:
  *    summary: List all clients
  *    tags: [clients]
@@ -56,7 +56,7 @@ const clients = Router()
  *            schema:
  *              type: array
  *              items:
- *                $ref: '#/components/schemas/ClientResponse'
+ *                $ref: '#/components/schemas/MongoClientResponse'
  *  post:
  *    summary: Create a new client
  *    tags: [clients]
@@ -65,18 +65,18 @@ const clients = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/ClientBody'
+ *            $ref: '#/components/schemas/MongoClientBody'
  *    responses:
  *      201:
  *        description: Created client
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/ClientResponse'
+ *              $ref: '#/components/schemas/MongoClientResponse'
  */
 /**
  * @swagger
- * /clients/{id}:
+ * /nosql/clients/{id}:
  *  put:
  *    summary: Update a client
  *    tags: [clients]
@@ -91,14 +91,14 @@ const clients = Router()
  *      content:
  *        application/json:
  *          schema:
- *            $ref: '#/components/schemas/ClientBody'
+ *            $ref: '#/components/schemas/MongoClientBody'
  *    responses:
  *      200:
  *        description: Updated client
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/ClientResponse'
+ *                $ref: '#/components/schemas/MongoClientResponse'
  *  delete:
  *    summary: Delete a client
  *    tags: [clients]
@@ -115,7 +115,7 @@ const clients = Router()
  *        content:
  *          application/json:
  *            schema:
- *                $ref: '#/components/schemas/ClientResponse'
+ *                $ref: '#/components/schemas/MongoClientResponse'
  *            example:
  *                id: 4
  *                dni: 20202020
