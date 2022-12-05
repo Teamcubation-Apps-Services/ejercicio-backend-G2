@@ -30,9 +30,9 @@ const benefits = Router()
  *        name:
  *          type: string
  *        discountPercentage:
- *          type: string
+ *          type: number
  *        refoundCap:
- *          type: string
+ *          type: number
  *        valideSince:
  *          type: string
  *          format: date-time

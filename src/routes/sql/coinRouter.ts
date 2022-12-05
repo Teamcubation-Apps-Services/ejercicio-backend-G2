@@ -41,7 +41,7 @@ const coins = Router()
  */
 /**
  * @swagger
- * /coins:
+ * /sql/coins:
  *  get:
  *    summary: List all coins
  *    tags: [coins]
@@ -72,7 +72,7 @@ const coins = Router()
  */
 /**
  * @swagger
- * /coins/{id}:
+ * /sql/coins/{id}:
  *  put:
  *    summary: Update a coin
  *    tags: [coins]

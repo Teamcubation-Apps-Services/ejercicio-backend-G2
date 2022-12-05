@@ -45,7 +45,7 @@ const clients = Router()
  */
 /**
  * @swagger
- * /clients:
+ * /sql/clients:
  *  get:
  *    summary: List all clients
  *    tags: [clients]
@@ -76,7 +76,7 @@ const clients = Router()
  */
 /**
  * @swagger
- * /clients/{id}:
+ * /sql/clients/{id}:
  *  put:
  *    summary: Update a client
  *    tags: [clients]

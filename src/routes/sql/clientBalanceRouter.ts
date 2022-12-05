@@ -27,7 +27,7 @@ const clientBalance = Router()
  */
 /**
  * @swagger
- * /balances/{clientId}:
+ * /sql/balances/{clientId}:
  *  get:
  *    summary: List of the active balances for the given clientId
  *    tags: [clientBalances]
@@ -46,7 +46,7 @@ const clientBalance = Router()
  *              type: array
  *              items:
  *                $ref: '#/components/schemas/ClientBalance'
- * /balances/{clientId}/{coinId}:
+ * /sql/balances/{clientId}/{coinId}:
  *  get:
  *    summary: List of the active balances for the given clientId and coinId
  *    tags: [clientBalances]
@@ -129,7 +129,7 @@ const clientBalance = Router()
  *                coinId: 2
  *                balance: "100"
  *                isActive: false
- * /balances:
+ * /sql/balances:
  *  post:
  *    summary: Create a new balance
  *    tags: [clientBalances]

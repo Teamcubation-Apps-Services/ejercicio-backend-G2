@@ -49,7 +49,7 @@ const benefits = Router()
  */
 /**
  * @swagger
- * /benefits:
+ * /sql/benefits:
  *  get:
  *    summary: List all benefits
  *    tags: [benefits]
@@ -80,7 +80,7 @@ const benefits = Router()
  */
 /**
  * @swagger
- * /benefits/{id}:
+ * /sql/benefits/{id}:
  *  put:
  *    summary: Update a benefit
  *    tags: [benefits]

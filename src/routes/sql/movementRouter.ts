@@ -29,7 +29,7 @@ const movements = Router()
  */
 /**
  * @swagger
- * /movements:
+ * /sql/movements:
  *  get:
  *    summary: List all movements
  *    tags: [movements]
@@ -60,7 +60,7 @@ const movements = Router()
  */
 /**
  * @swagger
- * /movements/{id}:
+ * /sql/movements/{id}:
  *  put:
  *    summary: Update a movement
  *    tags: [movements]
