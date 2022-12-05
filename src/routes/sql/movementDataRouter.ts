@@ -53,7 +53,7 @@ const movementData = Router()
  */
 /**
  * @swagger
- * /sql/movementdata:
+ * /sql/movement-data:
  *  get:
  *    summary: List all movementsData
  *    tags: [movementsData]
@@ -84,7 +84,7 @@ const movementData = Router()
  */
 /**
  * @swagger
- * /sql/movementdata/{id}:
+ * /sql/movement-data/{id}:
  *  put:
  *    summary: Update a movementData
  *    tags: [movementsData]

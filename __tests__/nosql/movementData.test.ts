@@ -14,7 +14,7 @@ const testMovementData = {
 }
 
 it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/nosql/movementdata')
+    const response = await supertest(app).get('/nosql/movement-data')
     
     expect(response.body.length).toBeGreaterThan(0)
     expect(response.statusCode).toBe(200)
@@ -22,7 +22,7 @@ it('Should return an array with at least 1 record, and status code 200', async()
 
 
 it('Should return the correct document', async () => {
-    const response = await supertest(app).get('/nosql/movementdata/6384f7001149fcd0ff14ff70')
+    const response = await supertest(app).get('/nosql/movement-data/6384f7001149fcd0ff14ff70')
     
     
     expect(response.body[0].clientId).toBe("oaifjaoefj")
@@ -37,7 +37,7 @@ it('Should return the correct document', async () => {
 
 
 it('Should create a coin', async() => {
-    const response = await supertest(app).post('/nosql/movementdata').send({...testMovementData})
+    const response = await supertest(app).post('/nosql/movement-data').send({...testMovementData})
     
     // Guardo el id del nuevo documento para despues poder hacer un .put y un .delete con el mismo sin afectar a otra data de la db
     idResponse = response.body.id;
@@ -59,14 +59,14 @@ it('Should create a coin', async() => {
 
 
 it('Should not create a coin if not name is given', async() => {
-    const response = await supertest(app).post('/nosql/movementdata').send({senderWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", receiverWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", coinId: "idfrometh",})
+    const response = await supertest(app).post('/nosql/movement-data').send({senderWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", receiverWalletAddress: "0x651C602e329A6cd02363379A96Cd5742605B7fA8", coinId: "idfrometh",})
 
     expect(response.statusCode).toBe(400)
 })
 
 
 it('Should update a record', async () => {
-    const response = await supertest(app).put(`/nosql/movementdata/${idResponse}`).send({senderWalletAddress: "0x651C602e329A6cd0236337JUANCd5742605B7fA8", coinId: "ETHid"})
+    const response = await supertest(app).put(`/nosql/movement-data/${idResponse}`).send({senderWalletAddress: "0x651C602e329A6cd0236337JUANCd5742605B7fA8", coinId: "ETHid"})
 
     expect(response.statusCode).toBe(200)
     expect(response.body.senderWalletAddress).toBe("0x651C602e329A6cd0236337JUANCd5742605B7fA8")
@@ -77,7 +77,7 @@ it('Should update a record', async () => {
 
 
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete(`/nosql/movementdata/${idResponse}`)
+    const response = await supertest(app).delete(`/nosql/movement-data/${idResponse}`)
     
     expect(response.statusCode).toBe(200)
     expect(response.body.isActive).toBe(false)
