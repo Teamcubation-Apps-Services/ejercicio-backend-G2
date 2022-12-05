@@ -52,16 +52,18 @@ export const updateClientRepository = async (req: Request, res: Response): Promi
         id: Number(id)
       }
     })
-    if (client !== null && client.isActive) {
-      return await prisma.client.update({
-        where: {
-          id: Number(id)
-        },
-        data
-      })
-    } else {
-      return new Error('Invalid id')
+    if (client === null) {
+      return new Error('Record not found.')
     }
+    if (!client.isActive) {
+      return new Error('Invalid id.')
+    }
+    return await prisma.client.update({
+      where: {
+        id: Number(id)
+      },
+      data
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -75,22 +77,20 @@ export const deleteClientRepository = async (req: Request, res: Response): Promi
         id: Number(id)
       }
     })
-    if (client !== null) {
-      if (client.isActive) {
-        return await prisma.client.update({
-          where: {
-            id: Number(id)
-          },
-          data: {
-            isActive: false
-          }
-        })
-      } else {
-        return new Error('Client already deleted')
-      }
-    } else {
+    if (client === null) {
       return new Error('Record not found')
     }
+    if (!client.isActive) {
+      return new Error('Client already deleted.')
+    }
+    return await prisma.client.update({
+      where: {
+        id: Number(id)
+      },
+      data: {
+        isActive: false
+      }
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -104,7 +104,6 @@ export const deleteDefClientRepository = async (req: Request, res: Response): Pr
         id: Number(id)
       }
     })
-      
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
