@@ -48,16 +48,18 @@ export const updateMovementRepository = async (req: Request, res: Response): Pro
         id: Number(id)
       }
     })
-    if (movement !== null && movement.isActive) {
-      return await prisma.movement.update({
-        where: {
-          id: Number(id)
-        },
-        data
-      })
-    } else {
-      return new Error('Invalid id')
+    if (movement === null) {
+      return new Error('Record not found.')
     }
+    if (!movement.isActive) {
+      return new Error('Invalid id.')
+    }
+    return await prisma.movement.update({
+      where: {
+        id: Number(id)
+      },
+      data
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -71,22 +73,20 @@ export const deleteMovementRepository = async (req: Request, res: Response): Pro
         id: Number(id)
       }
     })
-    if (movement !== null) {
-      if (movement.isActive) {
-        return await prisma.movement.update({
-          where: {
-            id: Number(id)
-          },
-          data: {
-            isActive: false
-          }
-        })
-      } else {
-        return new Error('Movement already deleted')
-      }
-    } else {
+    if (movement === null) {
       return new Error('Record not found')
     }
+    if (!movement.isActive) {
+      return new Error('Movement already deleted.')
+    }
+    return await prisma.movement.update({
+      where: {
+        id: Number(id)
+      },
+      data: {
+        isActive: false
+      }
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
