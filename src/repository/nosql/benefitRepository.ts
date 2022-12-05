@@ -41,16 +41,18 @@ export const updateBenefitRepository = async (req: Request, res: Response): Prom
         id
       }
     })
-    if (benefit !== null && benefit.isActive) {
-      return await prisma.benefits.update({
-        where: {
-          id
-        },
-        data
-      })
-    } else {
+    if (benefit === null) {
+      return new Error('Record not found')
+    }
+    if (!benefit.isActive) {
       return new Error('Invalid id')
     }
+    return await prisma.benefits.update({
+      where: {
+        id
+      },
+      data
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -62,24 +64,22 @@ export const deleteBenefitRepository = async (req: Request, res: Response): Prom
     const benefit = await prisma.benefits.findUnique({
       where: {
         id
-      },
-    })
-    if (benefit !== null) {
-      if (benefit.isActive) {
-        return await prisma.benefits.update({
-          where: {
-            id
-          },
-          data: {
-            isActive: false
-          }
-        })
-      } else {
-        return new Error('Benefit already deleted')
       }
-    } else {
+    })
+    if (benefit === null) {
       return new Error('Record not found')
     }
+    if (!benefit.isActive) {
+      return new Error('Benefit already deleted')
+    }
+    return await prisma.benefits.update({
+      where: {
+        id
+      },
+      data: {
+        isActive: false
+      }
+    })
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
