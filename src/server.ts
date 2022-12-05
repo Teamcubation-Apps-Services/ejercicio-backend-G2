@@ -17,25 +17,30 @@ import nosqlCoinRouter from './routes/nosql/coinRouter'
 import nosqlClientRouter from './routes/nosql/clientRouter'
 import nosqlMovementDataRouter from './routes/nosql/movementDataRouter'
 
-const app = express()
+function createServer(){
+  const app = express()
+  
+  app.use(express.json())
+  // sql
+  app.use('/sql/benefits', sqlBenefitRouter)
+  app.use('/sql/coins', sqlCoinRouter)
+  app.use('/sql/movements', sqlMovementRouter)
+  app.use('/sql/clients', sqlClientRouter)
+  app.use('/sql/balances', sqlClientBalanceRouter)
+  app.use('/sql/movement-data', sqlMovementDataRouter)
+  
+  //nosql
+  app.use('/nosql/benefits', nosqlBenefitRouter)
+  app.use('/nosql/coins', nosqlCoinRouter)
+  app.use('/nosql/clients', nosqlClientRouter)
+  app.use('/nosql/movement-data', nosqlMovementDataRouter)
+  
+  const specs = swaggerJSDoc(options)
+  app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs))
 
-app.use(express.json())
+  return app
+}
 
-//sql
-app.use('/sql/benefits', sqlBenefitRouter)
-app.use('/sql/coins', sqlCoinRouter)
-app.use('/sql/movements', sqlMovementRouter)
-app.use('/sql/clients', sqlClientRouter)
-app.use('/sql/balances', sqlClientBalanceRouter)
-app.use('/sql/movementdata', sqlMovementDataRouter)
+export default createServer
 
-//nosql
-app.use('/nosql/benefits', nosqlBenefitRouter)
-app.use('/nosql/coins', nosqlCoinRouter)
-app.use('/nosql/clients', nosqlClientRouter)
-app.use('/nosql/movementdata', nosqlMovementDataRouter)
 
-const specs = swaggerJSDoc(options)
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(specs))
-
-export default app
