@@ -15,17 +15,17 @@ export const getAllMovmentDataRepository = async (req: Request, res: Response): 
   }
 }
 
-export const getMovementDataRepository = async (req: Request, res: Response) : Promise<MovementData[] | Error> => {
+export const getMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
   try {
     const id = req.params.id
 
-    return await prisma.movementData.findMany({where: {id}})
+    return await prisma.movementData.findMany({ where: { id } })
   } catch (e: any) {
     return new Error(e.meta?.cause)
   }
 }
 
-export const postMovementDataRepository = async (req: Request, res: Response) : Promise<MovementData | Error> => {
+export const postMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
   try {
     const { clientId, type, senderWalletAddress, receiverWalletAddress, coinId, amount, fee } = req.body
 
@@ -46,50 +46,50 @@ export const postMovementDataRepository = async (req: Request, res: Response) : 
   }
 }
 
-export const updateMovementDataRepository = async (req: Request, res: Response) : Promise<MovementData | Error> => {
+export const updateMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
   try {
     const data = req.body
     const id = req.params.id
-    const movementData = await prisma.movementData.findUnique({where: {id}})
-    if (movementData !== null && movementData.isActive) {
-      return await prisma.movementData.update({
-        where: {
-          id
-        },
-        data
-      })
-    } else {
+    const movementData = await prisma.movementData.findUnique({ where: { id } })
+    if (movementData === null) {
+      return new Error('Record not found')
+    }
+    if (!movementData.isActive) {
       return new Error('Invalid id')
     }
+    return await prisma.movementData.update({
+      where: {
+        id
+      },
+      data
+    })
   } catch (e: any) {
     return new Error(e.meta?.cause)
   }
 }
 
-export const deleteMovementDataRepository = async (req: Request, res: Response) : Promise<MovementData | Error> => {
+export const deleteMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
   try {
     const { id } = req.params
     const movementData = await prisma.movementData.findUnique({
       where: {
         id
-      },
-    })
-    if (movementData !== null) {
-      if (movementData.isActive) {
-        return await prisma.movementData.update({
-          where: {
-            id
-          },
-          data: {
-            isActive: false
-          }
-        })
-      } else {
-        return new Error('Movement data already deleted')
       }
-    } else {
+    })
+    if (movementData === null) {
       return new Error('Record not found')
     }
+    if (!movementData.isActive) {
+      return new Error('Movement data already deleted')
+    }
+    return await prisma.movementData.update({
+      where: {
+        id
+      },
+      data: {
+        isActive: false
+      }
+    })
   } catch (e: any) {
     return new Error(e.meta?.cause)
   }
