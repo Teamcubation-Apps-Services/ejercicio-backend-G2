@@ -28,11 +28,14 @@ export const getClientBalanceRepository = async (req: Request, res: Response): P
         }
       }
     })
-    if (balance !== null && balance.isActive) {
-      return balance
-    } else {
+
+    if (balance === null) {
       return new Error('Balance not found')
     }
+    if (!balance.isActive) {
+      return new Error('Balance not found')
+    }
+    return balance
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -41,22 +44,22 @@ export const getClientBalanceRepository = async (req: Request, res: Response): P
 export const createClientBalanceRepository = async (req: Request, res: Response): Promise<ClientBalance | Error> => {
   try {
     const { clientId, coinId, balance } = req.body
-    return await prisma.clientBalance.upsert({ 
+    return await prisma.clientBalance.upsert({
       where: {
         clientId_coinId: {
           clientId,
-          coinId,
+          coinId
         }
-     },
-     update: {
-      isActive: true,
-      balance
-     },
-     create: {
-      clientId,
-      coinId,
-      balance
-     }
+      },
+      update: {
+        isActive: true,
+        balance
+      },
+      create: {
+        clientId,
+        coinId,
+        balance
+      }
     })
   } catch (e: any) {
     return new Error(e.meta.cause || 'Invalid clientId/coinId pair')
@@ -78,8 +81,13 @@ export const updateClientBalanceRepository = async (req: Request, res: Response)
         balance: Number(balance)
       }
     })
-    if (clientBalance !== null && clientBalance.isActive) return clientBalance
-    else return new Error('Fail to update. Balance not found')
+    if (clientBalance === null) {
+      return new Error('Record not found.')
+    }
+    if (!clientBalance.isActive) {
+      return new Error('Invalid id.')
+    }
+    return clientBalance
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
@@ -99,8 +107,13 @@ export const deleteClientBalanceRepository = async (req: Request, res: Response)
         isActive: false
       }
     })
-    if (clientBalance !== null) return clientBalance
-    else return new Error('Fail to delete. Balance not found')
+    if (clientBalance === null) {
+      return new Error('Record not found.')
+    }
+    if (!clientBalance.isActive) {
+      return new Error('Invalid id.')
+    }
+    return clientBalance
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
