@@ -4,7 +4,7 @@ import * as BenefitRepository from '../../src/repository/sql/benefitRepository'
 
 const app = createServer()
 
-const benefitId = "6385083253473e2efed16d19"
+const benefitId = 1
 
 const benefitInput = {
   name: "Test benefit",
