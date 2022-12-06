@@ -49,7 +49,7 @@ it('Should not create a movement if not type is given', async () => {
 it('Should update a record', async () => {
   jest.spyOn(MovementRepository, 'updateMovementRepository')
     // @ts-ignore
-    .mockReturnValueOnce(benefitPayload)
+    .mockReturnValueOnce(movementPayload)
   const { statusCode } = await supertest(app).put(`/sql/movements/${movementId}`).send({ ...movementInput, name: 'New name' })
 
   expect(statusCode).toBe(200)
@@ -58,7 +58,7 @@ it('Should update a record', async () => {
 it('Should delete a record', async () => {
   jest.spyOn(MovementRepository, 'deleteMovementRepository')
   // @ts-ignore
-    .mockReturnValueOnce(benefitPayload)
+    .mockReturnValueOnce(movementPayload)
   const { statusCode } = await supertest(app).delete(`/sql/movements/${movementId}`)
 
   expect(statusCode).toBe(200)
