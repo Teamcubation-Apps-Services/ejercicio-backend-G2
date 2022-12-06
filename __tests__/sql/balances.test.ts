@@ -1,37 +1,72 @@
-import app from '../../src/app'
+import createServer from '../../src/server'
 import supertest from 'supertest'
+import * as ClientBalanceRepository from '../../src/repository/sql/clientBalanceRepository'
 
-it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/sql/balances/1')
-    
-    expect(response.body.length).toBeGreaterThan(0)
-    expect(response.statusCode).toBe(200)
+const app = createServer()
+
+const balanceId = 1
+
+const balanceInput = {
+    clientId: 2,
+    coinId: 3,
+    balance: 999
+}
+
+const balancePayload = {
+    id: balanceId,
+    ...balanceInput
+}
+
+it('Should return an array with all client balances given a clientId and status code 200', async() => {
+    const getAllClientBalancesMock = jest.spyOn(ClientBalanceRepository, "getAllClientBalancesRepository")
+    //@ts-ignore
+        .mockReturnValueOnce([balancePayload])
+    const { clientId } = balanceInput
+    const { statusCode, body } = await supertest(app).get(`/sql/balances/${clientId}`)
+
+    expect(statusCode).toBe(200)
+    expect(body).toEqual([balancePayload])
+    expect(getAllClientBalancesMock).toHaveBeenCalled()
+})
+
+it('Should return an array with all balances matching clientId and coinId given and status code 200', async() => {
+    const getClientBalanceMock = jest.spyOn(ClientBalanceRepository, "getClientBalanceRepository")
+    //@ts-ignore
+        .mockReturnValueOnce([balancePayload])
+    const { clientId, coinId } = balanceInput
+    const { statusCode, body } = await supertest(app).get(`/sql/balances/${clientId}/${coinId}`)
+
+    expect(statusCode).toBe(200)
+    expect(body).toEqual([balancePayload])
+    expect(getClientBalanceMock).toHaveBeenCalled()
 })
 
 it('Should create a balance', async() => {
-    const response = await supertest(app).post('/sql/balances').send({clientId: 1, coinId: 3, balance: 100})
-    expect(response.statusCode).toBe(201)
-    expect(response.body.clientId).toBe(1)
-    expect(response.body.coinId).toBe(3)
-    expect(response.body.balance).toBe("100")
-    expect(response.body.isActive).toBe(true)
-})
-
-it('Should not create a negative balance', async() => {
-    const response = await supertest(app).post('/sql/balances/1/2').send({balance: -20})
-
-    expect(response.statusCode).toBe(404)
+    jest.spyOn(ClientBalanceRepository, "createClientBalanceRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(balancePayload)
+    const { statusCode, body} = await supertest(app).post('/sql/balances').send(balanceInput)
+    
+    expect(statusCode).toBe(201)
+    expect(body).toEqual(balancePayload)
 })
 
 it('Should update a record', async () => {
-    const response = await supertest(app).put('/sql/balances/1/2').send({balance: 222})
-    expect(response.statusCode).toBe(200)
-    expect(response.body.balance).toBe("222")
+    jest.spyOn(ClientBalanceRepository, "updateClientBalanceRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(balancePayload)
+    const { clientId, coinId } = balanceInput
+    const { statusCode } = await supertest(app).put(`/sql/balances/${clientId}/${coinId}`).send({balance: 222})
+        
+    expect(statusCode).toBe(200)
 })
 
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete('/sql/balances/1/3')
-    
-    expect(response.statusCode).toBe(200)
-    expect(response.body.isActive).toBe(false)
+    jest.spyOn(ClientBalanceRepository, "deleteClientBalanceRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(balancePayload)
+    const { clientId, coinId } = balanceInput
+    const { statusCode } = await supertest(app).delete(`/sql/balances/${clientId}/${coinId}`)
+
+    expect(statusCode).toBe(200)
 })
