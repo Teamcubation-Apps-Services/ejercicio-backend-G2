@@ -53,7 +53,7 @@ it('Should not create a client if not dni is given', async () => {
 it('Should update a record', async () => {
   jest.spyOn(ClientRepository, 'updateClientRepository')
     // @ts-ignore
-    .mockReturnValueOnce(benefitPayload)
+    .mockReturnValueOnce(clientPayload)
   const { statusCode } = await supertest(app).put(`/sql/clients/${clientId}`).send({ ...clientInput, name: 'New name' })
 
   expect(statusCode).toBe(200)
@@ -62,7 +62,7 @@ it('Should update a record', async () => {
 it('Should delete a record', async () => {
   jest.spyOn(ClientRepository, 'deleteClientRepository')
   // @ts-ignore
-    .mockReturnValueOnce(benefitPayload)
+    .mockReturnValueOnce(clientPayload)
   const { statusCode } = await supertest(app).delete(`/sql/clients/${clientId}`)
 
   expect(statusCode).toBe(200)
