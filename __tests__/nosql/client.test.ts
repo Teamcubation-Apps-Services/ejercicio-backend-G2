@@ -54,7 +54,7 @@ it('Should update a record', async () => {
   jest.spyOn(ClientRepository, 'updateClientRepository')
     // @ts-ignore
     .mockReturnValueOnce(benefitPayload)
-  const { statusCode } = await supertest(app).put(`/nosql/benefits/${clientId}`).send({ ...clientInput, name: 'New name' })
+  const { statusCode } = await supertest(app).put(`/nosql/clients/${clientId}`).send({ ...clientInput, name: 'New name' })
 
   expect(statusCode).toBe(200)
 })
@@ -63,7 +63,7 @@ it('Should delete a record', async () => {
   jest.spyOn(ClientRepository, 'deleteClientRepository')
   // @ts-ignore
     .mockReturnValueOnce(benefitPayload)
-  const { statusCode } = await supertest(app).delete(`/nosql/benefits/${clientId}`)
+  const { statusCode } = await supertest(app).delete(`/nosql/clients/${clientId}`)
 
   expect(statusCode).toBe(200)
 })
