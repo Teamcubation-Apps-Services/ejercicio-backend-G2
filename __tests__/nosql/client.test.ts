@@ -1,53 +1,69 @@
-import app from '../../src/app'
+import createServer from '../../src/server'
 import supertest from 'supertest'
+import * as ClientRepository from '../../src/repository/nosql/clientsRepository'
 
-let idResponse: string;
+const app = createServer()
 
-let testClient = { 
-  dni: "31164a331", 
-  firstName: 'Matias', 
-  lastName: 'Kosoy', 
-  email: 'holaprob2ando@gmail.com', 
-  phoneNumber: 123412434 
+const clientId = '6385013a6b5f7a49046e5638'
+
+const clientInput = {
+  dni: '40396022',
+  firstName: 'Julia',
+  lastName: 'Zack',
+  email: 'julia.zack@iovlab1s.org',
+  phoneNumber: '1130232614'
+}
+
+const clientPayload = {
+  id: clientId,
+  ...clientInput
 }
 
 it('Should return an array with at least 1 record, and status code 200', async () => {
-  const response = await supertest(app).get('/nosql/clients/')
+  const getAllClientsMock = jest.spyOn(ClientRepository, 'getAllClientRepository')
+    // @ts-ignore
+    .mockReturnValueOnce([clientPayload])
+  const { statusCode, body } = await supertest(app).get('/nosql/clients')
 
-  expect(response.body.length).toBeGreaterThan(0)
-  expect(response.statusCode).toBe(200)
+  expect(statusCode).toBe(200)
+  expect(body).toEqual([clientPayload])
+  expect(getAllClientsMock).toHaveBeenCalled()
 })
 
 it('Should create a client', async () => {
-  const response = await supertest(app).post('/nosql/clients').send({...testClient})
-  
-  idResponse = response.body.id
-  
-  console.log(response.error);
-  
-  expect(response.statusCode).toBe(201)
-  expect(response.body.dni).toBe(testClient.dni)
-  expect(response.body.firstName).toBe(testClient.firstName)
-  expect(response.body.lastName).toBe(testClient.lastName)
-  expect(response.body.email).toBe(testClient.email)
-  expect(response.body.phoneNumber).toBe(testClient.phoneNumber)
-  expect(response.body.isActive).toBe(true)
+  jest.spyOn(ClientRepository, 'createClientRepository')
+    // @ts-ignore
+    .mockReturnValueOnce(clientPayload)
+  const { statusCode, body } = await supertest(app).post('/nosql/clients').send(clientInput)
+
+  expect(statusCode).toBe(201)
+  expect(body).toEqual(clientPayload)
+})
+
+it('Should not create a client if not dni is given', async () => {
+  jest.spyOn(ClientRepository, 'createClientRepository')
+    // @ts-ignore
+    .mockReturnValueOnce(clientPayload)
+  const { dni, ...rest } = clientInput
+  const { statusCode } = await supertest(app).post('/nosql/clients').send(rest)
+
+  expect(statusCode).toBe(400)
 })
 
 it('Should update a record', async () => {
-  const response = await supertest(app).put(`/nosql/clients/${idResponse}`).send({ email: 'holacambiemimail@gmail.com' })
-  expect(response.statusCode).toBe(200)
-  expect(response.body.email).toBe('holacambiemimail@gmail.com')
+  jest.spyOn(ClientRepository, 'updateClientRepository')
+    // @ts-ignore
+    .mockReturnValueOnce(benefitPayload)
+  const { statusCode } = await supertest(app).put(`/nosql/benefits/${clientId}`).send({ ...clientInput, name: 'New name' })
+
+  expect(statusCode).toBe(200)
 })
 
 it('Should delete a record', async () => {
-  const response = await supertest(app).delete(`/nosql/clients/${idResponse}`)
+  jest.spyOn(ClientRepository, 'deleteClientRepository')
+  // @ts-ignore
+    .mockReturnValueOnce(benefitPayload)
+  const { statusCode } = await supertest(app).delete(`/nosql/benefits/${clientId}`)
 
-  expect(response.statusCode).toBe(200)
-  expect(response.body.isActive).toBe(false)
-})
-
-it('Should definitely delete a record', async () => {
-  const response = await supertest(app).delete(`/nosql/clients/delete/${idResponse}`)
-  expect(response.statusCode).toBe(200)
+  expect(statusCode).toBe(200)
 })
