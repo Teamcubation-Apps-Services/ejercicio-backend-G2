@@ -3,7 +3,7 @@ import { PrismaClient as SqlClient, MovementData } from '../../../prisma/generat
 
 const prisma = new SqlClient()
 
-export const getAllMovmentDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
+export const getAllMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
   try {
     return await prisma.movementData.findMany({
       where: {

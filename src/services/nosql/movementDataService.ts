@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import { getAllMovmentDataRepository, getMovementDataRepository, postMovementDataRepository, updateMovementDataRepository, deleteMovementDataRepository } from '../../repository/nosql/movementDataRepository'
+import { getAllMovementDataRepository, getMovementDataRepository, postMovementDataRepository, updateMovementDataRepository, deleteMovementDataRepository } from '../../repository/nosql/movementDataRepository'
 
 export const getAllMovementData = async (req: Request, res: Response): Promise<void> => {
-  const movementsData = await getAllMovmentDataRepository(req, res)
+  const movementsData = await getAllMovementDataRepository(req, res)
   if (movementsData instanceof Error) {
     res.status(400).json({ message: movementsData.message })
   } else {
