@@ -1,61 +1,69 @@
-import app from '../../src/app'
+import createServer from '../../src/server'
 import supertest from 'supertest'
+import * as BenefitRepository from '../../src/repository/sql/benefitRepository'
 
-let idResponse: string;
+const app = createServer()
 
-const testBenefit = {
+const benefitId = "6385083253473e2efed16d19"
+
+const benefitInput = {
   name: "Test benefit",
   discountPercentage: 10,
-  refoundCap: 18122022,
-  valideSince: new Date("2022-01-01"),
-  valideTo: new Date("2023-01-01")
+  refoundCap: 9999,
+  valideSince: "2022-11-03T00:00:00.000Z",
+  valideTo: "2023-11-03T00:00:00.000Z"
 }
 
-const incompleteBenefit = {
-  discountPercentage: 10,
-  refoundCap: 18122022,
-  valideSince: new Date("2022-01-01"),
-  valideTo: new Date("2023-01-01")
+const benefitPayload = {
+    id: benefitId,
+    ...benefitInput
 }
 
-const updateBenefit = {
-  name: "Test benefit edited"
-}
+it('Should return an array with one record and status code 200', async() => {
+    const getAllBenefitsMock = jest.spyOn(BenefitRepository, "getAllBenefitsRepository")
+    //@ts-ignore
+        .mockReturnValueOnce([benefitPayload])
+    const { statusCode, body } = await supertest(app).get('/sql/benefits')
 
-it('Should return an array with at least 1 record, and status code 200', async() => {
-    const response = await supertest(app).get('/sql/benefits')
-    
-    expect(response.body.length).toBeGreaterThan(0)
-    expect(response.statusCode).toBe(200)
+    expect(statusCode).toBe(200)
+    expect(body).toEqual([benefitPayload])
+    expect(getAllBenefitsMock).toHaveBeenCalled()
 })
 
 it('Should create a benefit', async() => {
-    const response = await supertest(app).post('/sql/benefits').send(testBenefit)
-    idResponse = response.body.id
-    expect(response.statusCode).toBe(201)
-    expect(response.body.name).toBe(testBenefit.name)
-    expect(response.body.discountPercentage).toBe(testBenefit.discountPercentage.toString())
-    expect(response.body.refoundCap).toBe(testBenefit.refoundCap.toString())
-    expect(response.body.valideSince).toBe(testBenefit.valideSince.toISOString())
-    expect(response.body.valideTo).toBe(testBenefit.valideTo.toISOString())
-    expect(response.body.isActive).toBe(true)
+    jest.spyOn(BenefitRepository, "createBenefitRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(benefitPayload)
+    const { statusCode, body} = await supertest(app).post('/sql/benefits').send(benefitInput)
+    
+    expect(statusCode).toBe(201)
+    expect(body).toEqual(benefitPayload)
 })
 
 it('Should not create a benefit if not name is given', async() => {
-    const response = await supertest(app).post('/sql/benefits').send(incompleteBenefit)
-
-    expect(response.statusCode).toBe(400)
+    jest.spyOn(BenefitRepository, "createBenefitRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(benefitPayload)
+    const { name, ...rest } = benefitInput
+    const { statusCode } = await supertest(app).post('/sql/benefits').send(rest)
+    
+    expect(statusCode).toBe(400)
 })
 
 it('Should update a record', async () => {
-    const response = await supertest(app).put(`/sql/benefits/${idResponse}`).send(updateBenefit)
-    expect(response.statusCode).toBe(200)
-    expect(response.body.name).toBe(updateBenefit.name)
+    jest.spyOn(BenefitRepository, "updateBenefitRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(benefitPayload)
+    const { statusCode } = await supertest(app).put(`/sql/benefits/${benefitId}`).send({...benefitInput, name: "New name"})
+
+    expect(statusCode).toBe(200)
 })
 
 it('Should delete a record', async() => {
-    const response = await supertest(app).delete(`/sql/benefits/${idResponse}`)
-    
-    expect(response.statusCode).toBe(200)
-    expect(response.body.isActive).toBe(false)
+    jest.spyOn(BenefitRepository, "deleteBenefitRepository")
+    //@ts-ignore
+        .mockReturnValueOnce(benefitPayload)
+    const { statusCode } = await supertest(app).delete(`/sql/benefits/${benefitId}`)
+
+    expect(statusCode).toBe(200)
 })
