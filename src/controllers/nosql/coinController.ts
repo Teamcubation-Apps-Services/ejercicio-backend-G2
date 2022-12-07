@@ -22,7 +22,6 @@ export const getCoinController = async(req: Request, res: Response, next: NextFu
 export const postCoinController = async(req: Request, res: Response, next: NextFunction): Promise<void> => {
     try{
         const { name, description, quotationReference, annualPerformance } = req.body
-        console.log(req.body);
         
         if (name && description && quotationReference && annualPerformance) await postCoin(req,res)
         else res.status(400).send('Missing value')
