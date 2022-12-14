@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/sql-client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id            Int             @id @default(autoincrement())
+  dni           String          @unique @db.VarChar(255)
+  firstName     String          @db.VarChar(255)
+  lastName      String          @db.VarChar(255)
+  email         String          @unique @db.VarChar(255)
+  phoneNumber   Int             @unique
+  isActive     Boolean  @default(true)
+  movementData  MovementData[]
+  clientBalance ClientBalance[]
+}
+
+model Movement {
+  id           Int            @id @default(autoincrement())
+  type         String         @db.VarChar(255)
+  isActive     Boolean  @default(true)
+  movementData MovementData[]
+}
+
+model Benefits {
+  id                 Int      @id @default(autoincrement())
+  name               String   @db.VarChar(255)
+  discountPercentage Decimal
+  refoundCap         Decimal
+  valideSince        DateTime
+  valideTo           DateTime
+  isActive     Boolean  @default(true)
+}
+
+model Coin {
+  id                 Int             @id @default(autoincrement())
+  name               String          @db.VarChar(255)
+  description        String          @db.VarChar(255)
+  quotationReference Decimal
+  annualPerformance  Decimal
+  isActive     Boolean  @default(true)
+  clientBalance      ClientBalance[]
+  movementData       MovementData[]
+}
+
+model MovementData {
+  id                    Int      @id @default(autoincrement())
+  date                  DateTime
+  client                Client   @relation(fields: [clientId], references: [id])
+  clientId              Int
+  movement              Movement @relation(fields: [movementId], references: [id])
+  movementId            Int
+  senderWalletAddress   String   @db.VarChar(255)
+  receiverWalletAddress String   @db.VarChar(255)
+  coin                  Coin     @relation(fields: [coinId], references: [id])
+  coinId                Int
+  amount                Decimal
+  fee                   Decimal
+  isActive     Boolean  @default(true)
+}
+
+model ClientBalance {
+  id       Int      @id @default(autoincrement())
+  client   Client  @relation(fields: [clientId], references: [id])
+  clientId Int
+  coin     Coin    @relation(fields: [coinId], references: [id])
+  coinId   Int
+  balance  Decimal
+  isActive     Boolean  @default(true)
+  @@unique([clientId, coinId])
+}
