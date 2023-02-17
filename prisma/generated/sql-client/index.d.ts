@@ -24,6 +24,7 @@ export type Client = {
   email: string
   phoneNumber: number
   isActive: boolean
+  password: string
 }
 
 /**
@@ -47,6 +48,7 @@ export type Benefits = {
   refoundCap: Prisma.Decimal
   valideSince: Date
   valideTo: Date
+  imageURL: string
   isActive: boolean
 }
 
@@ -1130,6 +1132,7 @@ export namespace Prisma {
     email: string | null
     phoneNumber: number | null
     isActive: boolean | null
+    password: string | null
   }
 
   export type ClientMaxAggregateOutputType = {
@@ -1140,6 +1143,7 @@ export namespace Prisma {
     email: string | null
     phoneNumber: number | null
     isActive: boolean | null
+    password: string | null
   }
 
   export type ClientCountAggregateOutputType = {
@@ -1150,6 +1154,7 @@ export namespace Prisma {
     email: number
     phoneNumber: number
     isActive: number
+    password: number
     _all: number
   }
 
@@ -1172,6 +1177,7 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     isActive?: true
+    password?: true
   }
 
   export type ClientMaxAggregateInputType = {
@@ -1182,6 +1188,7 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     isActive?: true
+    password?: true
   }
 
   export type ClientCountAggregateInputType = {
@@ -1192,6 +1199,7 @@ export namespace Prisma {
     email?: true
     phoneNumber?: true
     isActive?: true
+    password?: true
     _all?: true
   }
 
@@ -1295,6 +1303,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive: boolean
+    password: string
     _count: ClientCountAggregateOutputType | null
     _avg: ClientAvgAggregateOutputType | null
     _sum: ClientSumAggregateOutputType | null
@@ -1324,6 +1333,7 @@ export namespace Prisma {
     email?: boolean
     phoneNumber?: boolean
     isActive?: boolean
+    password?: boolean
     movementData?: boolean | MovementDataFindManyArgs
     clientBalance?: boolean | ClientBalanceFindManyArgs
     _count?: boolean | ClientCountOutputTypeArgs
@@ -3067,6 +3077,7 @@ export namespace Prisma {
     refoundCap: Decimal | null
     valideSince: Date | null
     valideTo: Date | null
+    imageURL: string | null
     isActive: boolean | null
   }
 
@@ -3077,6 +3088,7 @@ export namespace Prisma {
     refoundCap: Decimal | null
     valideSince: Date | null
     valideTo: Date | null
+    imageURL: string | null
     isActive: boolean | null
   }
 
@@ -3087,6 +3099,7 @@ export namespace Prisma {
     refoundCap: number
     valideSince: number
     valideTo: number
+    imageURL: number
     isActive: number
     _all: number
   }
@@ -3111,6 +3124,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    imageURL?: true
     isActive?: true
   }
 
@@ -3121,6 +3135,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    imageURL?: true
     isActive?: true
   }
 
@@ -3131,6 +3146,7 @@ export namespace Prisma {
     refoundCap?: true
     valideSince?: true
     valideTo?: true
+    imageURL?: true
     isActive?: true
     _all?: true
   }
@@ -3234,6 +3250,7 @@ export namespace Prisma {
     refoundCap: Decimal
     valideSince: Date
     valideTo: Date
+    imageURL: string
     isActive: boolean
     _count: BenefitsCountAggregateOutputType | null
     _avg: BenefitsAvgAggregateOutputType | null
@@ -3263,6 +3280,7 @@ export namespace Prisma {
     refoundCap?: boolean
     valideSince?: boolean
     valideTo?: boolean
+    imageURL?: boolean
     isActive?: boolean
   }
 
@@ -6976,6 +6994,7 @@ export namespace Prisma {
     refoundCap: 'refoundCap',
     valideSince: 'valideSince',
     valideTo: 'valideTo',
+    imageURL: 'imageURL',
     isActive: 'isActive'
   };
 
@@ -7000,7 +7019,8 @@ export namespace Prisma {
     lastName: 'lastName',
     email: 'email',
     phoneNumber: 'phoneNumber',
-    isActive: 'isActive'
+    isActive: 'isActive',
+    password: 'password'
   };
 
   export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -7085,6 +7105,7 @@ export namespace Prisma {
     email?: StringFilter | string
     phoneNumber?: IntFilter | number
     isActive?: BoolFilter | boolean
+    password?: StringFilter | string
     movementData?: MovementDataListRelationFilter
     clientBalance?: ClientBalanceListRelationFilter
   }
@@ -7097,6 +7118,7 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     isActive?: SortOrder
+    password?: SortOrder
     movementData?: MovementDataOrderByRelationAggregateInput
     clientBalance?: ClientBalanceOrderByRelationAggregateInput
   }
@@ -7116,6 +7138,7 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     isActive?: SortOrder
+    password?: SortOrder
     _count?: ClientCountOrderByAggregateInput
     _avg?: ClientAvgOrderByAggregateInput
     _max?: ClientMaxOrderByAggregateInput
@@ -7134,6 +7157,7 @@ export namespace Prisma {
     email?: StringWithAggregatesFilter | string
     phoneNumber?: IntWithAggregatesFilter | number
     isActive?: BoolWithAggregatesFilter | boolean
+    password?: StringWithAggregatesFilter | string
   }
 
   export type MovementWhereInput = {
@@ -7187,6 +7211,7 @@ export namespace Prisma {
     refoundCap?: DecimalFilter | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFilter | Date | string
     valideTo?: DateTimeFilter | Date | string
+    imageURL?: StringFilter | string
     isActive?: BoolFilter | boolean
   }
 
@@ -7197,6 +7222,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    imageURL?: SortOrder
     isActive?: SortOrder
   }
 
@@ -7211,6 +7237,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    imageURL?: SortOrder
     isActive?: SortOrder
     _count?: BenefitsCountOrderByAggregateInput
     _avg?: BenefitsAvgOrderByAggregateInput
@@ -7229,6 +7256,7 @@ export namespace Prisma {
     refoundCap?: DecimalWithAggregatesFilter | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeWithAggregatesFilter | Date | string
     valideTo?: DateTimeWithAggregatesFilter | Date | string
+    imageURL?: StringWithAggregatesFilter | string
     isActive?: BoolWithAggregatesFilter | boolean
   }
 
@@ -7419,6 +7447,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     movementData?: MovementDataCreateNestedManyWithoutClientInput
     clientBalance?: ClientBalanceCreateNestedManyWithoutClientInput
   }
@@ -7431,6 +7460,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     movementData?: MovementDataUncheckedCreateNestedManyWithoutClientInput
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutClientInput
   }
@@ -7442,6 +7472,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     movementData?: MovementDataUpdateManyWithoutClientNestedInput
     clientBalance?: ClientBalanceUpdateManyWithoutClientNestedInput
   }
@@ -7454,6 +7485,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     movementData?: MovementDataUncheckedUpdateManyWithoutClientNestedInput
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutClientNestedInput
   }
@@ -7466,6 +7498,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
   }
 
   export type ClientUpdateManyMutationInput = {
@@ -7475,6 +7508,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type ClientUncheckedUpdateManyInput = {
@@ -7485,6 +7519,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
   }
 
   export type MovementCreateInput = {
@@ -7536,6 +7571,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    imageURL?: string
     isActive?: boolean
   }
 
@@ -7546,6 +7582,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    imageURL?: string
     isActive?: boolean
   }
 
@@ -7555,6 +7592,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageURL?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -7565,6 +7603,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageURL?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -7575,6 +7614,7 @@ export namespace Prisma {
     refoundCap: Decimal | DecimalJsLike | number | string
     valideSince: Date | string
     valideTo: Date | string
+    imageURL?: string
     isActive?: boolean
   }
 
@@ -7584,6 +7624,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageURL?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -7594,6 +7635,7 @@ export namespace Prisma {
     refoundCap?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     valideSince?: DateTimeFieldUpdateOperationsInput | Date | string
     valideTo?: DateTimeFieldUpdateOperationsInput | Date | string
+    imageURL?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
@@ -7860,6 +7902,7 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     isActive?: SortOrder
+    password?: SortOrder
   }
 
   export type ClientAvgOrderByAggregateInput = {
@@ -7875,6 +7918,7 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     isActive?: SortOrder
+    password?: SortOrder
   }
 
   export type ClientMinOrderByAggregateInput = {
@@ -7885,6 +7929,7 @@ export namespace Prisma {
     email?: SortOrder
     phoneNumber?: SortOrder
     isActive?: SortOrder
+    password?: SortOrder
   }
 
   export type ClientSumOrderByAggregateInput = {
@@ -7989,6 +8034,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    imageURL?: SortOrder
     isActive?: SortOrder
   }
 
@@ -8005,6 +8051,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    imageURL?: SortOrder
     isActive?: SortOrder
   }
 
@@ -8015,6 +8062,7 @@ export namespace Prisma {
     refoundCap?: SortOrder
     valideSince?: SortOrder
     valideTo?: SortOrder
+    imageURL?: SortOrder
     isActive?: SortOrder
   }
 
@@ -8909,6 +8957,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     clientBalance?: ClientBalanceCreateNestedManyWithoutClientInput
   }
 
@@ -8920,6 +8969,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     clientBalance?: ClientBalanceUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -8980,6 +9030,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     clientBalance?: ClientBalanceUpdateManyWithoutClientNestedInput
   }
 
@@ -8991,6 +9042,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     clientBalance?: ClientBalanceUncheckedUpdateManyWithoutClientNestedInput
   }
 
@@ -9041,6 +9093,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     movementData?: MovementDataCreateNestedManyWithoutClientInput
   }
 
@@ -9052,6 +9105,7 @@ export namespace Prisma {
     email: string
     phoneNumber: number
     isActive?: boolean
+    password?: string
     movementData?: MovementDataUncheckedCreateNestedManyWithoutClientInput
   }
 
@@ -9096,6 +9150,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     movementData?: MovementDataUpdateManyWithoutClientNestedInput
   }
 
@@ -9107,6 +9162,7 @@ export namespace Prisma {
     email?: StringFieldUpdateOperationsInput | string
     phoneNumber?: IntFieldUpdateOperationsInput | number
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    password?: StringFieldUpdateOperationsInput | string
     movementData?: MovementDataUncheckedUpdateManyWithoutClientNestedInput
   }
 

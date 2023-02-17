@@ -16,6 +16,7 @@ model Client {
   email         String          @unique @db.VarChar(255)
   phoneNumber   Int             @unique
   isActive     Boolean  @default(true)
+  password      String          @db.VarChar(60) @default("")
   movementData  MovementData[]
   clientBalance ClientBalance[]
 }
@@ -34,6 +35,7 @@ model Benefits {
   refoundCap         Decimal
   valideSince        DateTime
   valideTo           DateTime
+  imageURL           String   @db.VarChar(255) @default("https://cdn-icons-png.flaticon.com/512/2615/2615079.png")
   isActive     Boolean  @default(true)
 }
 

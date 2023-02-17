@@ -95,6 +95,7 @@ exports.Prisma.BenefitsScalarFieldEnum = makeEnum({
   refoundCap: 'refoundCap',
   valideSince: 'valideSince',
   valideTo: 'valideTo',
+  imageURL: 'imageURL',
   isActive: 'isActive'
 });
 
@@ -113,7 +114,8 @@ exports.Prisma.ClientScalarFieldEnum = makeEnum({
   lastName: 'lastName',
   email: 'email',
   phoneNumber: 'phoneNumber',
-  isActive: 'isActive'
+  isActive: 'isActive',
+  password: 'password'
 });
 
 exports.Prisma.CoinScalarFieldEnum = makeEnum({
