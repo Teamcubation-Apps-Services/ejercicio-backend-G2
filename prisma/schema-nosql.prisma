@@ -44,11 +44,11 @@ model MovementData {
   date                  DateTime
   type                  String
   client                Client   @relation(fields: [clientId], references: [id])
-  clientId              String
+  clientId              String   @db.ObjectId
   senderWalletAddress   String
   receiverWalletAddress String
   coin                  Coin     @relation(fields: [coinId], references: [id])
-  coinId                String
+  coinId                String   @db.ObjectId
   amount                Float
   fee                   Float
   isActive     Boolean  @default(true)

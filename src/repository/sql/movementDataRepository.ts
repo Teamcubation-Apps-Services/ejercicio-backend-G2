@@ -8,6 +8,18 @@ export const getAllMovmentDataRepository = async (req: Request, res: Response): 
     return await prisma.movementData.findMany({
       where: {
         isActive: true
+      },
+      include: {
+        coin: {
+          select: {
+            name: true
+          }
+        },
+        movement: {
+          select: {
+            type: true
+          }
+        }
       }
     })
   } catch (e: any) {
@@ -19,7 +31,24 @@ export const getMovementDataRepository = async (req: Request, res: Response): Pr
   try {
     const id = Number(req.params.id)
 
-    return await prisma.movementData.findMany({ where: { id } })
+    return await prisma.movementData.findMany({
+      where: {
+        clientId: id,
+        isActive: true
+      },
+      include: {
+        coin: {
+          select: {
+            name: true
+          }
+        },
+        movement: {
+          select: {
+            type: true
+          }
+        }
+      }
+    });
   } catch (e: any) {
     return new Error(e.meta.cause)
   }
