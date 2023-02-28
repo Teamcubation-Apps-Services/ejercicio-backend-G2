@@ -1,7 +1,13 @@
-import { Router } from 'express'
-import { getAllMovementDataController, getMovementDataController, postMovementDataController, updateMovementDataController, deleteMovementDataController } from '../../controllers/nosql/movementDataController'
+import { Router } from 'express';
+import {
+  getAllMovementDataController,
+  getMovementDataController,
+  postMovementDataController,
+  updateMovementDataController,
+  deleteMovementDataController,
+} from '../../controllers/nosql/movementDataController';
 
-const movementData = Router()
+const movementData = Router();
 
 /**
  * @swagger
@@ -47,9 +53,9 @@ const movementData = Router()
  *          type: boolean
  */
 /**
-  * @swagger
-  * tags:
-  *   name: movementsData
+ * @swagger
+ * tags:
+ *   name: movementsData
  */
 /**
  * @swagger
@@ -134,7 +140,14 @@ const movementData = Router()
  *              fee:
  */
 
-movementData.route('/').get(getAllMovementDataController).post(postMovementDataController)
-movementData.route('/:id').get(getMovementDataController).put(updateMovementDataController).delete(deleteMovementDataController)
+movementData
+  .route('/')
+  .get(getAllMovementDataController)
+  .post(postMovementDataController);
+movementData
+  .route('/:id')
+  .get(getMovementDataController)
+  .put(updateMovementDataController)
+  .delete(deleteMovementDataController);
 
-export default movementData
+export default movementData;
