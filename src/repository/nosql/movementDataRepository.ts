@@ -27,7 +27,7 @@ export const getMovementDataRepository = async (req: Request, res: Response): Pr
     const id = req.params.id;
 
     return await prisma.movementData.findMany({
-      where: { clientId: id, isActive: true },
+      where: { isActive: true, client: { dni: id } },
       include: {
         coin: {
           select: {
