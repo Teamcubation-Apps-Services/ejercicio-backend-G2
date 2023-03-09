@@ -1,28 +1,37 @@
-import { Request, Response } from 'express'
-import { PrismaClient as NoSqlClient, MovementData } from '../../../prisma/generated/nosql-client'
+import { Request, Response } from "express";
+import {
+  PrismaClient as NoSqlClient,
+  MovementData,
+} from "../../../prisma/generated/nosql-client";
 
-const prisma = new NoSqlClient()
+const prisma = new NoSqlClient();
 
-export const getAllMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
+export const getAllMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData[] | Error> => {
   try {
     return await prisma.movementData.findMany({
       where: {
-        isActive: true
+        isActive: true,
       },
       include: {
         coin: {
           select: {
-            name: true
-          }
-        }
-      }
-    })
+            name: true,
+          },
+        },
+      },
+    });
   } catch (e: any) {
-    return new Error(e.meta?.cause)
+    return new Error(e.meta?.cause);
   }
-}
+};
 
-export const getMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
+export const getMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData[] | Error> => {
   try {
     const id = req.params.id;
 
@@ -35,15 +44,26 @@ export const getMovementDataRepository = async (req: Request, res: Response): Pr
           },
         },
       },
-    })
+    });
   } catch (e: any) {
-    return new Error(e.meta?.cause)
+    return new Error(e.meta?.cause);
   }
-}
+};
 
-export const postMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const postMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
-    const { clientId, type, senderWalletAddress, receiverWalletAddress, coinId, amount, fee } = req.body
+    const {
+      clientId,
+      type,
+      senderWalletAddress,
+      receiverWalletAddress,
+      coinId,
+      amount,
+      fee,
+    } = req.body;
 
     return await prisma.movementData.create({
       data: {
@@ -54,59 +74,67 @@ export const postMovementDataRepository = async (req: Request, res: Response): P
         receiverWalletAddress,
         coinId,
         amount,
-        fee
-      }
-    })
+        fee,
+      },
+    });
   } catch (e: any) {
-    return new Error(e)
+    return new Error(e);
   }
-}
+};
 
-export const updateMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const updateMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
-    const data = req.body
-    const id = req.params.id
-    const movementData = await prisma.movementData.findUnique({ where: { id } })
+    const data = req.body;
+    const id = req.params.id;
+    const movementData = await prisma.movementData.findUnique({
+      where: { id },
+    });
     if (movementData === null) {
-      return new Error('Record not found')
+      return new Error("Record not found");
     }
     if (!movementData.isActive) {
-      return new Error('Invalid id')
+      return new Error("Invalid id");
     }
     return await prisma.movementData.update({
       where: {
-        id
+        id,
       },
-      data
-    })
+      data,
+    });
   } catch (e: any) {
-    return new Error(e.meta?.cause)
+    return new Error(e.meta?.cause);
   }
-}
+};
 
-export const deleteMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const deleteMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
-    const { id } = req.params
+    const { id } = req.params;
     const movementData = await prisma.movementData.findUnique({
       where: {
-        id
-      }
-    })
+        id,
+      },
+    });
     if (movementData === null) {
-      return new Error('Record not found')
+      return new Error("Record not found");
     }
     if (!movementData.isActive) {
-      return new Error('Movement data already deleted')
+      return new Error("Movement data already deleted");
     }
     return await prisma.movementData.update({
       where: {
-        id
+        id,
       },
       data: {
-        isActive: false
-      }
-    })
+        isActive: false,
+      },
+    });
   } catch (e: any) {
-    return new Error(e.meta?.cause)
+    return new Error(e.meta?.cause);
   }
-}
+};
