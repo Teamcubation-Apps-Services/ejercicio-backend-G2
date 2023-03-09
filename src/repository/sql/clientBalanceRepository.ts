@@ -10,6 +10,18 @@ export const getAllClientBalancesRepository = async (req: Request, res: Response
       where: {
         clientId: Number(clientId),
         isActive: true
+      },
+      include: {
+        coin: {
+          select: {
+            name: true
+          }
+        },
+        client: {
+          select: {
+            firstName: true
+          }
+        }
       }
     })
   } catch (e: any) {

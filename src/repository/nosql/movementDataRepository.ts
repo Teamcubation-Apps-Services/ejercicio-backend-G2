@@ -1,13 +1,20 @@
 import { Request, Response } from 'express'
-import { PrismaClient as SqlClient, MovementData } from '../../../prisma/generated/nosql-client'
+import { PrismaClient as NoSqlClient, MovementData } from '../../../prisma/generated/nosql-client'
 
-const prisma = new SqlClient()
+const prisma = new NoSqlClient()
 
 export const getAllMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
   try {
     return await prisma.movementData.findMany({
       where: {
         isActive: true
+      },
+      include: {
+        coin: {
+          select: {
+            name: true
+          }
+        }
       }
     })
   } catch (e: any) {
@@ -17,9 +24,18 @@ export const getAllMovementDataRepository = async (req: Request, res: Response):
 
 export const getMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
   try {
-    const id = req.params.id
+    const id = req.params.id;
 
-    return await prisma.movementData.findMany({ where: { id } })
+    return await prisma.movementData.findMany({
+      where: { isActive: true, client: { dni: id } },
+      include: {
+        coin: {
+          select: {
+            name: true,
+          },
+        },
+      },
+    })
   } catch (e: any) {
     return new Error(e.meta?.cause)
   }
