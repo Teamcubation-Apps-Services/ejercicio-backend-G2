@@ -5,8 +5,16 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/routes/**/*.ts',
     '<rootDir>/src/controllers/**/*.ts',
-    '<rootDir>/src/services/**/*.ts'
+    '<rootDir>/src/services/**/*.ts',
   ],
-  testPathIgnorePatterns: ["dist"],
-  setupFiles: ["<rootDir>/test-setup.js"]
-}
+  testPathIgnorePatterns: ['dist'],
+  setupFiles: ['<rootDir>/test-setup.js'],
+  coverageThreshold: {
+    global: {
+      statements: 50,
+      branches: 50,
+      functions: 50,
+      lines: 50,
+    },
+  },
+};

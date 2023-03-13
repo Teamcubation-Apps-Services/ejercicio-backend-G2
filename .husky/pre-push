@@ -2,4 +2,4 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 npm run test
-npx jest --coverage --coverageThreshold={\"global\":{\"branches\":50,\"functions\":50,\"lines\":50,\"statements\":50}}
+npm run test:coverage
