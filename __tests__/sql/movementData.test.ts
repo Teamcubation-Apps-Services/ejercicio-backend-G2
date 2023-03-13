@@ -4,7 +4,7 @@ import * as MovementDataRepository from '../../src/repository/sql/movementDataRe
 
 const app = createServer()
 
-const movementDataId: number = 6
+const movementDataId = 6
 
 const movementDataInput = {
   date: '2022-10-18T16:23:00.000Z',
@@ -23,7 +23,8 @@ const movementDataPayload = {
 }
 
 it('Should return an array with at least 1 record, and status code 200', async () => {
-  const getAllMovementData = jest.spyOn(MovementDataRepository, 'getAllMovmentDataRepository')
+  const getAllMovementData = jest
+    .spyOn(MovementDataRepository, 'getAllMovmentDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce([movementDataPayload])
   const { statusCode, body } = await supertest(app).get('/sql/movement-data')
@@ -34,20 +35,27 @@ it('Should return an array with at least 1 record, and status code 200', async (
 })
 
 it('Should return the correct document', async () => {
-  const getMovementData = jest.spyOn(MovementDataRepository, 'getMovementDataRepository')
+  const getMovementData = jest
+    .spyOn(MovementDataRepository, 'getMovementDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce(movementDataPayload)
-  const { statusCode, body } = await supertest(app).get(`/sql/movement-data/${movementDataId}`)
+  const { statusCode, body } = await supertest(app).get(
+    `/sql/movement-data/${movementDataId}`
+  )
 
   expect(statusCode).toBe(200)
   expect(body).toEqual(movementDataPayload)
+  expect(getMovementData).toHaveBeenCalled()
 })
 
 it('Should create a movement', async () => {
-  jest.spyOn(MovementDataRepository, 'postMovementDataRepository')
+  jest
+    .spyOn(MovementDataRepository, 'postMovementDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce(movementDataPayload)
-  const response = await supertest(app).post('/sql/movement-data').send(movementDataInput)
+  const response = await supertest(app)
+    .post('/sql/movement-data')
+    .send(movementDataInput)
 
   console.log(response.error)
 
@@ -56,29 +64,38 @@ it('Should create a movement', async () => {
 })
 
 it('Should not create a movement if not coinId is given', async () => {
-  jest.spyOn(MovementDataRepository, 'postMovementDataRepository')
+  jest
+    .spyOn(MovementDataRepository, 'postMovementDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce(movementDataPayload)
   const { coinId, ...inputWithoutCoin } = movementDataInput
-  const { statusCode } = await supertest(app).post('/sql/movement-data').send(inputWithoutCoin)
+  const { statusCode } = await supertest(app)
+    .post('/sql/movement-data')
+    .send(inputWithoutCoin)
 
   expect(statusCode).toBe(400)
 })
 
 it('Should update a record', async () => {
-  jest.spyOn(MovementDataRepository, 'updateMovementDataRepository')
+  jest
+    .spyOn(MovementDataRepository, 'updateMovementDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce(movementDataPayload)
-  const { statusCode } = await supertest(app).put(`/sql/movement-data/${movementDataId}`).send({ ...movementDataInput, coinId: '6384ffeae87779253278b98a' })
+  const { statusCode } = await supertest(app)
+    .put(`/sql/movement-data/${movementDataId}`)
+    .send({ ...movementDataInput, coinId: '6384ffeae87779253278b98a' })
 
   expect(statusCode).toBe(200)
 })
 
 it('Should delete a record', async () => {
-  jest.spyOn(MovementDataRepository, 'deleteMovementDataRepository')
+  jest
+    .spyOn(MovementDataRepository, 'deleteMovementDataRepository')
     // @ts-expect-error
     .mockReturnValueOnce(movementDataPayload)
-  const { statusCode } = await supertest(app).delete(`/sql/movement-data/${movementDataId}`)
+  const { statusCode } = await supertest(app).delete(
+    `/sql/movement-data/${movementDataId}`
+  )
 
   expect(statusCode).toBe(200)
 })

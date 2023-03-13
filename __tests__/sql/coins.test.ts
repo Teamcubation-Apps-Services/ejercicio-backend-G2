@@ -4,7 +4,7 @@ import * as CoinsRepository from '../../src/repository/sql/coinRepository'
 
 const app = createServer()
 
-const coinId: number = 1
+const coinId = 1
 
 const testCoin = {
   name: 'RBTC',

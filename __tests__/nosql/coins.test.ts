@@ -4,7 +4,7 @@ import * as CoinsRepository from '../../src/repository/nosql/coinRepository'
 
 const app = createServer()
 
-const coinId: string = '6384e5252653150f569c2356'
+const coinId = '6384e5252653150f569c2356'
 
 const testCoin = {
   name: 'RBTC',
