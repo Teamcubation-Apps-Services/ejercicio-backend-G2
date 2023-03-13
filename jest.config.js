@@ -6,5 +6,7 @@ module.exports = {
     '<rootDir>/src/routes/**/*.ts',
     '<rootDir>/src/controllers/**/*.ts',
     '<rootDir>/src/services/**/*.ts'
-  ]
+  ],
+  testPathIgnorePatterns: ["dist"],
+  setupFiles: ["<rootDir>/test-setup.js"]
 }
