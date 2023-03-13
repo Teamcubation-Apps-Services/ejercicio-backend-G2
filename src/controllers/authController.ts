@@ -31,10 +31,12 @@ export const protect = async (
     }
 
     // 2) Verification token
+    // @ts-ignore
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET)
 
     // 3) Check if user still exists
     const freshClient: any = await prisma.client.findUnique({
+      // @ts-ignore
       where: { id: decoded.id }
     })
 
