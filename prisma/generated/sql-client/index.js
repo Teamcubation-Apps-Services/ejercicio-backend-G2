@@ -78,8 +78,8 @@ const regularDirname = hasDirname && fs.existsSync(path.join(__dirname, 'schema.
 
 // if the client has been bundled, we need to look for the folders
 const foundDirname = !regularDirname && findSync(process.cwd(), [
-    "prisma/generated/sql-client",
     "generated/sql-client",
+    "sql-client",
 ], ['d'], ['d'], 1)[0]
 
 const dirname = regularDirname || foundDirname || __dirname
@@ -191,19 +191,27 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/Users/juancruzrausch/Desktop/Work/IOV/ejercicio-backend-G2/prisma/generated/sql-client",
+      "value": "/Users/juliazack/Documents/projects/teamcubation/multi-container-app/ejercicio-backend-G2/prisma/generated/sql-client",
       "fromEnvVar": null
     },
     "config": {
       "engineType": "library"
     },
-    "binaryTargets": [],
+    "binaryTargets": [
+      {
+        "fromEnvVar": null,
+        "value": "darwin-arm64"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "linux-arm64-openssl-1.1.x"
+      }
+    ],
     "previewFeatures": [],
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
-    "schemaEnvPath": "../../../.env"
+    "rootEnvPath": "../../../.env"
   },
   "relativePath": "../..",
   "clientVersion": "4.5.0",
@@ -232,6 +240,9 @@ exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
 path.join(__dirname, "libquery_engine-darwin-arm64.dylib.node");
-path.join(process.cwd(), "prisma/generated/sql-client/libquery_engine-darwin-arm64.dylib.node")
+path.join(process.cwd(), "generated/sql-client/libquery_engine-darwin-arm64.dylib.node")
+
+path.join(__dirname, "libquery_engine-linux-arm64-openssl-1.1.x.so.node");
+path.join(process.cwd(), "generated/sql-client/libquery_engine-linux-arm64-openssl-1.1.x.so.node")
 path.join(__dirname, "schema.prisma");
-path.join(process.cwd(), "prisma/generated/sql-client/schema.prisma")
+path.join(process.cwd(), "generated/sql-client/schema.prisma")

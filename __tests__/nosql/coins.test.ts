@@ -1,88 +1,88 @@
-import createServer from '../../src/server';
-import supertest from 'supertest';
-import * as CoinsRepository from '../../src/repository/nosql/coinRepository';
+import createServer from '../../src/server'
+import supertest from 'supertest'
+import * as CoinsRepository from '../../src/repository/nosql/coinRepository'
 
 const app = createServer()
 
-const coinId : string = "6384e5252653150f569c2356";
- 
+const coinId = '6384e5252653150f569c2356'
+
 const testCoin = {
-    name: 'RBTC',
-    description: 'rsk',
-    quotationReference: 102,
-    annualPerformance: 13,
+  name: 'RBTC',
+  description: 'rsk',
+  quotationReference: 102,
+  annualPerformance: 13
 }
 
 const coinInput = {
-    name: "ETH",
-    description: "ethereum",
-    quotationReference: 1333.43,
-    annualPerformance: 10
+  name: 'ETH',
+  description: 'ethereum',
+  quotationReference: 1333.43,
+  annualPerformance: 10
 }
 
 const coinPayload = {
-    id: coinId,
-    ...coinInput
+  id: coinId,
+  ...coinInput
 }
 
 // Se fija que el get devuelva aunque sea un documento
-it('Should return an array with at least 1 record, and status code 200', async() => {
-    const getAllCoinsMock = jest.spyOn(CoinsRepository, "getAllCoinRepository")
-    //@ts-ignore
+it('Should return an array with at least 1 record, and status code 200', async () => {
+  const getAllCoinsMock = jest.spyOn(CoinsRepository, 'getAllCoinRepository')
+    // @ts-expect-error
     .mockReturnValueOnce([coinPayload])
-    const { statusCode, body } = await supertest(app).get('/nosql/coins')
+  const { statusCode, body } = await supertest(app).get('/nosql/coins')
 
-    expect(statusCode).toBe(200)
-    expect(body).toEqual([coinPayload])
-    expect(getAllCoinsMock).toHaveBeenCalled()
+  expect(statusCode).toBe(200)
+  expect(body).toEqual([coinPayload])
+  expect(getAllCoinsMock).toHaveBeenCalled()
 })
 
-it('Should return the correct document', async() =>{
-    const getCoin = jest.spyOn(CoinsRepository,"getCoinRepository")
-    //@ts-ignore
+it('Should return the correct document', async () => {
+  const getCoin = jest.spyOn(CoinsRepository, 'getCoinRepository')
+    // @ts-expect-error
     .mockReturnValueOnce(coinInput)
-    const { statusCode, body } = await supertest(app).get(`/nosql/coins/${coinId}`)
+  const { statusCode, body } = await supertest(app).get(`/nosql/coins/${coinId}`)
 
-    expect(statusCode).toBe(200)
-    expect(body).toEqual(coinInput)
-    expect(getCoin).toHaveBeenCalled()
+  expect(statusCode).toBe(200)
+  expect(body).toEqual(coinInput)
+  expect(getCoin).toHaveBeenCalled()
 })
 
-it('Should create a coin', async() => {
-    jest.spyOn(CoinsRepository, "postCoinRepository")
-    //@ts-ignore
-        .mockReturnValueOnce(testCoin)
-    const { statusCode, body} = await supertest(app).post('/nosql/coins').send(testCoin)
-    
-    expect(statusCode).toBe(201)
-    expect(body).toEqual(testCoin)
+it('Should create a coin', async () => {
+  jest.spyOn(CoinsRepository, 'postCoinRepository')
+    // @ts-expect-error
+    .mockReturnValueOnce(testCoin)
+  const { statusCode, body } = await supertest(app).post('/nosql/coins').send(testCoin)
+
+  expect(statusCode).toBe(201)
+  expect(body).toEqual(testCoin)
 })
 
-it('Should not create a benefit if not name is given', async() => {
-    jest.spyOn(CoinsRepository, "postCoinRepository")
-    //@ts-ignore
-        .mockReturnValueOnce()
-    
-    const { statusCode } = await supertest(app).post('/nosql/coins').send({description: 'rsk', quotationReference: '102', annualPerformance: '13'})
-    expect(statusCode).toBe(400)
+it('Should not create a benefit if not name is given', async () => {
+  jest.spyOn(CoinsRepository, 'postCoinRepository')
+    // @ts-expect-error
+    .mockReturnValueOnce()
+
+  const { statusCode } = await supertest(app).post('/nosql/coins').send({ description: 'rsk', quotationReference: '102', annualPerformance: '13' })
+  expect(statusCode).toBe(400)
 })
 
 it('Should update a record', async () => {
-    jest.spyOn(CoinsRepository, "updateCoinRepository")
-    //@ts-ignore
-        .mockReturnValueOnce()
-    const response = await supertest(app).put(`/nosql/coins/${coinId}`).send({name: "Nombre"})
+  jest.spyOn(CoinsRepository, 'updateCoinRepository')
+    // @ts-expect-error
+    .mockReturnValueOnce()
+  const response = await supertest(app).put(`/nosql/coins/${coinId}`).send({ name: 'Nombre' })
 
-    expect(response.statusCode).toBe(200)
+  expect(response.statusCode).toBe(200)
 })
 
-it('Should delete a record', async() => {
-    jest.spyOn(CoinsRepository, "deleteCoinRepository")
-    //@ts-ignore
-        .mockReturnValueOnce()
-    const { statusCode } = await supertest(app).delete(`/nosql/coins/${coinId}`)
+it('Should delete a record', async () => {
+  jest.spyOn(CoinsRepository, 'deleteCoinRepository')
+    // @ts-expect-error
+    .mockReturnValueOnce()
+  const { statusCode } = await supertest(app).delete(`/nosql/coins/${coinId}`)
 
-    expect(statusCode).toBe(200)
+  expect(statusCode).toBe(200)
 })
 
 // Dejo estos comentarios para dejar documentado los test anteriores
@@ -91,7 +91,7 @@ it('Should delete a record', async() => {
 // it('Should return the correct document', async () => {
 //     const response = await supertest(app).get('/nosql/coins/6384e5252653150f569c2356')
 //     console.log(response.body);
-    
+
 //     expect(response.body[0].name).toBe("ETH")
 //     expect(response.body[0].description).toBe("ethereum")
 //     expect(response.body[0].annualPerformance).toBe(10)
@@ -137,7 +137,7 @@ it('Should delete a record', async() => {
 // // de lo contratio nos retornara un mensaje de error diciendo que el documento ya esta borrado
 // it('Should delete a record', async() => {
 //     const response = await supertest(app).delete(`/nosql/coins/${idResponse}`)
-    
+
 //     expect(response.statusCode).toBe(200)
 //     expect(response.body.isActive).toBe(false)
 // })

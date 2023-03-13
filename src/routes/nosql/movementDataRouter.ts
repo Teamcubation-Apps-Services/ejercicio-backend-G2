@@ -1,13 +1,13 @@
-import { Router } from 'express';
+import { Router } from 'express'
 import {
   getAllMovementDataController,
   getMovementDataController,
   postMovementDataController,
   updateMovementDataController,
-  deleteMovementDataController,
-} from '../../controllers/nosql/movementDataController';
+  deleteMovementDataController
+} from '../../controllers/nosql/movementDataController'
 
-const movementData = Router();
+const movementData = Router()
 
 /**
  * @swagger
@@ -143,11 +143,11 @@ const movementData = Router();
 movementData
   .route('/')
   .get(getAllMovementDataController)
-  .post(postMovementDataController);
+  .post(postMovementDataController)
 movementData
   .route('/:id')
   .get(getMovementDataController)
   .put(updateMovementDataController)
-  .delete(deleteMovementDataController);
+  .delete(deleteMovementDataController)
 
-export default movementData;
+export default movementData

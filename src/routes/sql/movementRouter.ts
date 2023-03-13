@@ -112,5 +112,4 @@ movements.route('/').post(createMovementController)
 movements.route('/:id').put(updateMovementController)
 movements.route('/:id').delete(deleteMovementController)
 
-
 export default movements

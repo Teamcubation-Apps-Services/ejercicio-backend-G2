@@ -1,9 +1,15 @@
 import { Request, Response } from 'express'
-import { PrismaClient as NoSqlClient, MovementData } from '../../../prisma/generated/nosql-client'
+import {
+  PrismaClient as NoSqlClient,
+  MovementData
+} from '../../../prisma/generated/nosql-client'
 
 const prisma = new NoSqlClient()
 
-export const getAllMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
+export const getAllMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData[] | Error> => {
   try {
     return await prisma.movementData.findMany({
       where: {
@@ -22,28 +28,42 @@ export const getAllMovementDataRepository = async (req: Request, res: Response):
   }
 }
 
-export const getMovementDataRepository = async (req: Request, res: Response): Promise<MovementData[] | Error> => {
+export const getMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData[] | Error> => {
   try {
-    const id = req.params.id;
+    const id = req.params.id
 
     return await prisma.movementData.findMany({
       where: { isActive: true, client: { dni: id } },
       include: {
         coin: {
           select: {
-            name: true,
-          },
-        },
-      },
+            name: true
+          }
+        }
+      }
     })
   } catch (e: any) {
     return new Error(e.meta?.cause)
   }
 }
 
-export const postMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const postMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
-    const { clientId, type, senderWalletAddress, receiverWalletAddress, coinId, amount, fee } = req.body
+    const {
+      clientId,
+      type,
+      senderWalletAddress,
+      receiverWalletAddress,
+      coinId,
+      amount,
+      fee
+    } = req.body
 
     return await prisma.movementData.create({
       data: {
@@ -62,11 +82,16 @@ export const postMovementDataRepository = async (req: Request, res: Response): P
   }
 }
 
-export const updateMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const updateMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
     const data = req.body
     const id = req.params.id
-    const movementData = await prisma.movementData.findUnique({ where: { id } })
+    const movementData = await prisma.movementData.findUnique({
+      where: { id }
+    })
     if (movementData === null) {
       return new Error('Record not found')
     }
@@ -84,7 +109,10 @@ export const updateMovementDataRepository = async (req: Request, res: Response):
   }
 }
 
-export const deleteMovementDataRepository = async (req: Request, res: Response): Promise<MovementData | Error> => {
+export const deleteMovementDataRepository = async (
+  req: Request,
+  res: Response
+): Promise<MovementData | Error> => {
   try {
     const { id } = req.params
     const movementData = await prisma.movementData.findUnique({

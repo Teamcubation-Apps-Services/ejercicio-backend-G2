@@ -11,37 +11,37 @@ export const getAllCoin = async (req: Request, res: Response): Promise<void> => 
 }
 
 export const getCoin = async (req: Request, res: Response): Promise<void> => {
-    const coin = await getCoinRepository(req, res)
-    if (coin instanceof Error) {
-        res.status(400).json({ message: coin.message })
-    } else {
-        res.status(200).json(coin)
-    }
+  const coin = await getCoinRepository(req, res)
+  if (coin instanceof Error) {
+    res.status(400).json({ message: coin.message })
+  } else {
+    res.status(200).json(coin)
+  }
 }
 
 export const postCoin = async (req: Request, res: Response): Promise<void> => {
-    const coin = await postCoinRepository(req, res)
-    if (coin instanceof Error) {
-        res.status(400).json({ message: coin.message })
-    } else {
-        res.status(201).json(coin)
-    }
+  const coin = await postCoinRepository(req, res)
+  if (coin instanceof Error) {
+    res.status(400).json({ message: coin.message })
+  } else {
+    res.status(201).json(coin)
+  }
 }
 
 export const updateCoin = async (req: Request, res: Response): Promise<void> => {
-    const coin = await updateCoinRepository(req, res)
-    if (coin instanceof Error) {
-        res.status(400).json({ message: coin.message })
-    } else {
-        res.status(200).json(coin)
-    }
+  const coin = await updateCoinRepository(req, res)
+  if (coin instanceof Error) {
+    res.status(400).json({ message: coin.message })
+  } else {
+    res.status(200).json(coin)
+  }
 }
 
 export const deleteCoin = async (req: Request, res: Response): Promise<void> => {
-    const coin = await deleteCoinRepository(req,res)
-    if (coin instanceof Error) {
-        res.status(400).json({ message: coin.message })
-    } else {
-        res.status(200).json(coin)
-    }
+  const coin = await deleteCoinRepository(req, res)
+  if (coin instanceof Error) {
+    res.status(400).json({ message: coin.message })
+  } else {
+    res.status(200).json(coin)
+  }
 }
