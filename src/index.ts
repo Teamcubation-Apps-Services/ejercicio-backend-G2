@@ -1,4 +1,4 @@
-import createServer from "./server"
+import createServer from './server'
 
 const PORT = process.env.PORT || 3000
 const app = createServer()

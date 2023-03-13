@@ -21,7 +21,7 @@ const clientPayload = {
 
 it('Should return an array with at least 1 record, and status code 200', async () => {
   const getAllClientsMock = jest.spyOn(ClientRepository, 'getAllClientRepository')
-    // @ts-ignore
+    // @ts-expect-error
     .mockReturnValueOnce([clientPayload])
   const { statusCode, body } = await supertest(app).get('/sql/clients')
 
@@ -32,7 +32,7 @@ it('Should return an array with at least 1 record, and status code 200', async (
 
 it('Should create a client', async () => {
   jest.spyOn(ClientRepository, 'createClientRepository')
-    // @ts-ignore
+    // @ts-expect-error
     .mockReturnValueOnce(clientPayload)
   const { statusCode, body } = await supertest(app).post('/sql/clients').send(clientInput)
 
@@ -42,7 +42,7 @@ it('Should create a client', async () => {
 
 it('Should not create a client if not dni is given', async () => {
   jest.spyOn(ClientRepository, 'createClientRepository')
-    // @ts-ignore
+    // @ts-expect-error
     .mockReturnValueOnce(clientPayload)
   const { dni, ...rest } = clientInput
   const { statusCode } = await supertest(app).post('/sql/clients').send(rest)
@@ -52,7 +52,7 @@ it('Should not create a client if not dni is given', async () => {
 
 it('Should update a record', async () => {
   jest.spyOn(ClientRepository, 'updateClientRepository')
-    // @ts-ignore
+    // @ts-expect-error
     .mockReturnValueOnce(clientPayload)
   const { statusCode } = await supertest(app).put(`/sql/clients/${clientId}`).send({ ...clientInput, name: 'New name' })
 
@@ -61,7 +61,7 @@ it('Should update a record', async () => {
 
 it('Should delete a record', async () => {
   jest.spyOn(ClientRepository, 'deleteClientRepository')
-  // @ts-ignore
+  // @ts-expect-error
     .mockReturnValueOnce(clientPayload)
   const { statusCode } = await supertest(app).delete(`/sql/clients/${clientId}`)
 

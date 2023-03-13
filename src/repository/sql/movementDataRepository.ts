@@ -1,10 +1,10 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express'
 import {
   PrismaClient as SqlClient,
-  MovementData,
-} from "../../../prisma/generated/sql-client";
+  MovementData
+} from '../../../prisma/generated/sql-client'
 
-const prisma = new SqlClient();
+const prisma = new SqlClient()
 
 export const getAllMovmentDataRepository = async (
   req: Request,
@@ -13,56 +13,56 @@ export const getAllMovmentDataRepository = async (
   try {
     return await prisma.movementData.findMany({
       where: {
-        isActive: true,
+        isActive: true
       },
       include: {
         coin: {
           select: {
-            name: true,
-          },
+            name: true
+          }
         },
         movement: {
           select: {
-            type: true,
-          },
-        },
-      },
-    });
+            type: true
+          }
+        }
+      }
+    })
   } catch (e: any) {
-    console.log(e);
-    return new Error(e.meta.cause);
+    console.log(e)
+    return new Error(e.meta.cause)
   }
-};
+}
 
 export const getMovementDataRepository = async (
   req: Request,
   res: Response
 ): Promise<MovementData[] | Error> => {
   try {
-    const id = Number(req.params.id);
+    const id = Number(req.params.id)
 
     return await prisma.movementData.findMany({
       where: {
         clientId: id,
-        isActive: true,
+        isActive: true
       },
       include: {
         coin: {
           select: {
-            name: true,
-          },
+            name: true
+          }
         },
         movement: {
           select: {
-            type: true,
-          },
-        },
-      },
-    });
+            type: true
+          }
+        }
+      }
+    })
   } catch (e: any) {
-    return new Error(e.meta.cause);
+    return new Error(e.meta.cause)
   }
-};
+}
 
 export const postMovementDataRepository = async (
   req: Request,
@@ -76,8 +76,8 @@ export const postMovementDataRepository = async (
       receiverWalletAddress,
       coinId,
       amount,
-      fee,
-    } = req.body;
+      fee
+    } = req.body
 
     return await prisma.movementData.create({
       data: {
@@ -88,67 +88,67 @@ export const postMovementDataRepository = async (
         receiverWalletAddress,
         coinId,
         amount,
-        fee,
-      },
-    });
+        fee
+      }
+    })
   } catch (e: any) {
-    return new Error(e.meta.cause);
+    return new Error(e.meta.cause)
   }
-};
+}
 
 export const updateMovementDataRepository = async (
   req: Request,
   res: Response
 ): Promise<MovementData | Error> => {
   try {
-    const data = req.body;
-    const id = Number(req.params.id);
+    const data = req.body
+    const id = Number(req.params.id)
     const movementData = await prisma.movementData.findUnique({
-      where: { id },
-    });
+      where: { id }
+    })
     if (movementData === null) {
-      return new Error("Record not found.");
+      return new Error('Record not found.')
     }
     if (!movementData.isActive) {
-      return new Error("Invalid id");
+      return new Error('Invalid id')
     }
     return await prisma.movementData.update({
       where: {
-        id: Number(id),
+        id: Number(id)
       },
-      data,
-    });
+      data
+    })
   } catch (e: any) {
-    return new Error(e.meta.cause);
+    return new Error(e.meta.cause)
   }
-};
+}
 
 export const deleteMovementDataRepository = async (
   req: Request,
   res: Response
 ): Promise<MovementData | Error> => {
   try {
-    const { id } = req.params;
+    const { id } = req.params
     const movementData = await prisma.movementData.findUnique({
       where: {
-        id: Number(id),
-      },
-    });
+        id: Number(id)
+      }
+    })
     if (movementData === null) {
-      return new Error("Record not found");
+      return new Error('Record not found')
     }
     if (!movementData.isActive) {
-      return new Error("Movement data already deleted");
+      return new Error('Movement data already deleted')
     }
     return await prisma.movementData.update({
       where: {
-        id: Number(id),
+        id: Number(id)
       },
       data: {
-        isActive: false,
-      },
-    });
+        isActive: false
+      }
+    })
   } catch (e: any) {
-    return new Error(e.meta.cause);
+    return new Error(e.meta.cause)
   }
-};
+}
