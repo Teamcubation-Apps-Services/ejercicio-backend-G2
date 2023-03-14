@@ -2,9 +2,9 @@ name: Validation when pull request
 
 on:
   push:
-    branches: [main, docker-prisma]
+    branches: [main, workflow]
   pull_request:
-    branches: [main, docker-prisma]
+    branches: [main, workflow]
 
 jobs:
   build:
